@@ -1,7 +1,7 @@
 BEEwebPI
 ======
 
-.. image:: https://pbs.twimg.com/profile_images/378800000057657890/e4420ccca1d3d9307434370b6ab1d7d7_400x400.png
+.. image:: https://pbs.twimg.com/profile_images/378800000057657890/e4420ccca1d3d9307434370b6ab1d7d7_200x200.png
 .. :scale: 50 %
 .. :alt: BEEwebPI logo
 
