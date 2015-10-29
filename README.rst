@@ -19,7 +19,7 @@ BEEweb is located at `http://beeweb.local <http://beeweb.local>`_ and also at `h
 
 If a USB webcam or the Raspberry Pi camera is detected, MJPG-streamer will be started automatically as webcam server. OctoPrint on BEEwebPi ships with correctly configured stream and snapshot URLs pointing at it. If necessary, you can reach it under `http://beeweb.local/webcam/?action=stream <beeweb.local/webcam/?action=stream>`_ and SSL respectively, or directly on its configured port 8080: `http://beeweb.local:8080/?action=stream <beeweb.local:8080/?action=stream>`_.
 
-CuraEngine is installed and OctoPrint ships pre-configured with the correct path to utilize it for on-board-slicing. Just import a Cura Slicing Profile in OctoPrint's settings and start slicing directly on your Pi.
+CuraEngine is installed and BEEweb ships pre-configured with the correct path to utilize it for on-board-slicing. Just import a Cura Slicing Profile in BEEweb's settings and start slicing directly on your Pi.
 
 Features
 --------
