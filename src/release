@@ -6,8 +6,8 @@ else
 fi
 
 FILENAME=$(basename `ls . |  grep .img | tail -n 1` .img)  
-OCTOPI_FILENAME=$(echo $FILENAME-`cat ../filesystem/root/etc/octopi_version` | sed 's/raspbian/octopi/')
-mv ${FILENAME}.img $OCTOPI_FILENAME.img
-zip $OCTOPI_FILENAME.zip $OCTOPI_FILENAME.img
+BEEWEBPI_FILENAME=$(echo $FILENAME-`cat ../filesystem/root/etc/beewebpi_version` | sed 's/raspbian/beewebpi/')
+mv ${FILENAME}.img $BEEWEBPI_FILENAME.img
+zip $BEEWEBPI_FILENAME.zip $BEEWEBPI_FILENAME.img
 
 popd

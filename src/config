@@ -25,72 +25,72 @@ then
 fi
 
 ###############################################################################
-# All our config settings must start with OCTOPI_
+# All our config settings must start with BEEWEBPI_
 
-[ -n "$OCTOPI_SCRIPT_PATH" ] || OCTOPI_SCRIPT_PATH=$CONFIG_DIR
-[ -n "$OCTOPI_IMAGE_PATH" ] || OCTOPI_IMAGE_PATH=$OCTOPI_SCRIPT_PATH/image
+[ -n "$BEEWEBPI_SCRIPT_PATH" ] || BEEWEBPI_SCRIPT_PATH=$CONFIG_DIR
+[ -n "$BEEWEBPI_IMAGE_PATH" ] || BEEWEBPI_IMAGE_PATH=$BEEWEBPI_SCRIPT_PATH/image
 
-[ -n "$OCTOPI_ZIP_IMG" ] || OCTOPI_ZIP_IMG=`ls -t $OCTOPI_IMAGE_PATH/*-raspbian*.zip | head -n 1`
+[ -n "$BEEWEBPI_ZIP_IMG" ] || BEEWEBPI_ZIP_IMG=`ls -t $BEEWEBPI_IMAGE_PATH/*-raspbian*.zip | head -n 1`
 
-[ -n "$OCTOPI_WORKSPACE" ] || OCTOPI_WORKSPACE=$OCTOPI_SCRIPT_PATH/workspace$WORKSPACE_POSTFIX
-[ -n "$OCTOPI_CHROOT_SCRIPT_PATH" ] || OCTOPI_CHROOT_SCRIPT_PATH=$OCTOPI_SCRIPT_PATH/chroot_script
-[ -n "$OCTOPI_MOUNT_PATH" ] || OCTOPI_MOUNT_PATH=$OCTOPI_WORKSPACE/mount
+[ -n "$BEEWEBPI_WORKSPACE" ] || BEEWEBPI_WORKSPACE=$BEEWEBPI_SCRIPT_PATH/workspace$WORKSPACE_POSTFIX
+[ -n "$BEEWEBPI_CHROOT_SCRIPT_PATH" ] || BEEWEBPI_CHROOT_SCRIPT_PATH=$BEEWEBPI_SCRIPT_PATH/chroot_script
+[ -n "$BEEWEBPI_MOUNT_PATH" ] || BEEWEBPI_MOUNT_PATH=$BEEWEBPI_WORKSPACE/mount
 
-[ -n "$OCTOPI_OVERRIDE_HOSTNAME" ] || OCTOPI_OVERRIDE_HOSTNAME=octopi
+[ -n "$BEEWEBPI_OVERRIDE_HOSTNAME" ] || BEEWEBPI_OVERRIDE_HOSTNAME=beewebpi
 
-[ -n "$OCTOPI_BUILD_REPO_MIRROR" ] || OCTOPI_BUILD_REPO_MIRROR=
+[ -n "$BEEWEBPI_BUILD_REPO_MIRROR" ] || BEEWEBPI_BUILD_REPO_MIRROR=
 
-# OctoPrint repo & branch
-[ -n "$OCTOPI_OCTOPRINT_REPO_SHIP" ] || OCTOPI_OCTOPRINT_REPO_SHIP=https://github.com/foosel/OctoPrint.git
-[ -n "$OCTOPI_OCTOPRINT_REPO_BUILD" ] || OCTOPI_OCTOPRINT_REPO_BUILD=
-[ -n "$OCTOPI_OCTOPRINT_REPO_BRANCH" ] || OCTOPI_OCTOPRINT_REPO_BRANCH=master
-[ -n "$OCTOPI_INCLUDE_OCTOPRINT" ] || OCTOPI_INCLUDE_OCTOPRINT=yes
+# BEEweb repo & branch
+[ -n "$BEEWEBPI_BEEWEB_REPO_SHIP" ] || BEEWEBPI_BEEWEB_REPO_SHIP=https://github.com/beeverycreative/BEEweb
+[ -n "$BEEWEBPI_BEEWEB_REPO_BUILD" ] || BEEWEBPI_BEEWEB_REPO_BUILD=
+[ -n "$BEEWEBPI_BEEWEB_REPO_BRANCH" ] || BEEWEBPI_BEEWEB_REPO_BRANCH=develop
+[ -n "$BEEWEBPI_INCLUDE_BEEWEB" ] || BEEWEBPI_INCLUDE_BEEWEB=yes
 
 # OctoPiPanel repo & branch
-[ -n "$OCTOPI_OCTOPIPANEL_REPO_SHIP" ] || OCTOPI_OCTOPIPANEL_REPO_SHIP=https://github.com/jonaslorander/OctoPiPanel.git
-[ -n "$OCTOPI_OCTOPIPANEL_REPO_BUILD" ] || OCTOPI_OCTOPIPANEL_REPO_BUILD=
-[ -n "$OCTOPI_OCTOPIPANEL_REPO_BRANCH" ] || OCTOPI_OCTOPIPANEL_REPO_BRANCH=master
-[ -n "$OCTOPI_FBCP_REPO_SHIP" ] || OCTOPI_FBCP_REPO_SHIP=https://github.com/tasanakorn/rpi-fbcp
-[ -n "$OCTOPI_FBCP_REPO_BUILD" ] || OCTOPI_FBCP_REPO_BUILD=$OCTOPI_FBCP_REPO_SHIP
-[ -n "$OCTOPI_FBCP_REPO_BRANCH" ] || OCTOPI_FBCP_REPO_BRANCH=
-[ -n "$OCTOPI_INCLUDE_OCTOPIPANEL" ] || OCTOPI_INCLUDE_OCTOPIPANEL=yes
+[ -n "$BEEWEBPI_OCTOPIPANEL_REPO_SHIP" ] || BEEWEBPI_OCTOPIPANEL_REPO_SHIP=https://github.com/jonaslorander/OctoPiPanel.git
+[ -n "$BEEWEBPI_OCTOPIPANEL_REPO_BUILD" ] || BEEWEBPI_OCTOPIPANEL_REPO_BUILD=
+[ -n "$BEEWEBPI_OCTOPIPANEL_REPO_BRANCH" ] || BEEWEBPI_OCTOPIPANEL_REPO_BRANCH=master
+[ -n "$BEEWEBPI_FBCP_REPO_SHIP" ] || BEEWEBPI_FBCP_REPO_SHIP=https://github.com/tasanakorn/rpi-fbcp
+[ -n "$BEEWEBPI_FBCP_REPO_BUILD" ] || BEEWEBPI_FBCP_REPO_BUILD=$BEEWEBPI_FBCP_REPO_SHIP
+[ -n "$BEEWEBPI_FBCP_REPO_BRANCH" ] || BEEWEBPI_FBCP_REPO_BRANCH=
+[ -n "$BEEWEBPI_INCLUDE_OCTOPIPANEL" ] || BEEWEBPI_INCLUDE_OCTOPIPANEL=no
 
 # CuraEngine archive & version
-[ -n "$OCTOPI_CURAENGINE_VERSION" ] || OCTOPI_CURAENGINE_VERSION=15.04
-[ -n "$OCTOPI_CURAENGINE_ARCHIVE" ] || OCTOPI_CURAENGINE_ARCHIVE=https://github.com/Ultimaker/CuraEngine/archive/$OCTOPI_CURAENGINE_VERSION.zip
-[ -n "$OCTOPI_INCLUDE_CURAENGINE" ] || OCTOPI_INCLUDE_CURAENGINE=yes
+[ -n "$BEEWEBPI_CURAENGINE_VERSION" ] || BEEWEBPI_CURAENGINE_VERSION=15.04
+[ -n "$BEEWEBPI_CURAENGINE_ARCHIVE" ] || BEEWEBPI_CURAENGINE_ARCHIVE=https://github.com/Ultimaker/CuraEngine/archive/$BEEWEBPI_CURAENGINE_VERSION.zip
+[ -n "$BEEWEBPI_INCLUDE_CURAENGINE" ] || BEEWEBPI_INCLUDE_CURAENGINE=yes
 
 # mjpg streamer
-[ -n "$OCTOPI_MJPGSTREAMER_REPO_SHIP" ] || OCTOPI_MJPGSTREAMER_REPO_SHIP=https://github.com/jacksonliam/mjpg-streamer.git
-[ -n "$OCTOPI_MJPGSTREAMER_REPO_BUILD" ] || OCTOPI_MJPGSTREAMER_REPO_BUILD=
-[ -n "$OCTOPI_MJPGSTREAMER_REPO_BRANCH" ] || OCTOPI_MJPGSTREAMER_REPO_BRANCH=master
-[ -n "$OCTOPI_INCLUDE_MJPGSTREAMER" ] || OCTOPI_INCLUDE_MJPGSTREAMER=yes
+[ -n "$BEEWEBPI_MJPGSTREAMER_REPO_SHIP" ] || BEEWEBPI_MJPGSTREAMER_REPO_SHIP=https://github.com/jacksonliam/mjpg-streamer.git
+[ -n "$BEEWEBPI_MJPGSTREAMER_REPO_BUILD" ] || BEEWEBPI_MJPGSTREAMER_REPO_BUILD=
+[ -n "$BEEWEBPI_MJPGSTREAMER_REPO_BRANCH" ] || BEEWEBPI_MJPGSTREAMER_REPO_BRANCH=master
+[ -n "$BEEWEBPI_INCLUDE_MJPGSTREAMER" ] || BEEWEBPI_INCLUDE_MJPGSTREAMER=yes
 
 # HAProxy
-[ -n "$OCTOPI_HAPROXY_VERSION" ] || OCTOPI_HAPROXY_VERSION=1.5.8
-[ -n "$OCTOPI_HAPROXY_ARCHIVE" ] || OCTOPI_HAPROXY_ARCHIVE=http://www.haproxy.org/download/1.5/src/haproxy-$OCTOPI_HAPROXY_VERSION.tar.gz
-[ -n "$OCTOPI_INCLUDE_HAPROXY" ] || OCTOPI_INCLUDE_HAPROXY=yes
+[ -n "$BEEWEBPI_HAPROXY_VERSION" ] || BEEWEBPI_HAPROXY_VERSION=1.5.8
+[ -n "$BEEWEBPI_HAPROXY_ARCHIVE" ] || BEEWEBPI_HAPROXY_ARCHIVE=http://www.haproxy.org/download/1.5/src/haproxy-$BEEWEBPI_HAPROXY_VERSION.tar.gz
+[ -n "$BEEWEBPI_INCLUDE_HAPROXY" ] || BEEWEBPI_INCLUDE_HAPROXY=yes
 
 # WiringPi
-[ -n "$OCTOPI_WIRINGPI_REPO_SHIP" ] || OCTOPI_WIRINGPI_REPO_SHIP=git://git.drogon.net/wiringPi
-[ -n "$OCTOPI_WIRINGPI_REPO_BUILD" ] || OCTOPI_WIRINGPI_REPO_BUILD=
-[ -n "$OCTOPI_WIRINGPI_REPO_BRANCH" ] || OCTOPI_WIRINGPI_REPO_BRANCH=master
-[ -n "$OCTOPI_INCLUDE_WIRINGPI" ] || OCTOPI_INCLUDE_WIRINGPI=yes
+[ -n "$BEEWEBPI_WIRINGPI_REPO_SHIP" ] || BEEWEBPI_WIRINGPI_REPO_SHIP=git://git.drogon.net/wiringPi
+[ -n "$BEEWEBPI_WIRINGPI_REPO_BUILD" ] || BEEWEBPI_WIRINGPI_REPO_BUILD=
+[ -n "$BEEWEBPI_WIRINGPI_REPO_BRANCH" ] || BEEWEBPI_WIRINGPI_REPO_BRANCH=master
+[ -n "$BEEWEBPI_INCLUDE_WIRINGPI" ] || BEEWEBPI_INCLUDE_WIRINGPI=yes
 
 ###############################################################################
 # Rewrite any build urls that are not yet set if we have a repository mirror
 # configured.
 
-if [ -n "$OCTOPI_BUILD_REPO_MIRROR" ]
+if [ -n "$BEEWEBPI_BUILD_REPO_MIRROR" ]
 then
-	vars=`compgen -A variable | grep '^OCTOPI_' | grep 'REPO_BUILD'`
+	vars=`compgen -A variable | grep '^BEEWEBPI_' | grep 'REPO_BUILD'`
 	for var in $vars
 	do
 		if [ ! -n "${!var}" ]
 		then
 			repo_ship_var=${var%_BUILD}_SHIP
 			original=${!repo_ship_var}
-			rewritten=$OCTOPI_BUILD_REPO_MIRROR`echo $original | awk -F '/' '{print $(NF)}'`
+			rewritten=$BEEWEBPI_BUILD_REPO_MIRROR`echo $original | awk -F '/' '{print $(NF)}'`
 
 			echo "Rewriting build repo for $var from $original to $rewritten"
 			eval $var=$rewritten
@@ -104,7 +104,7 @@ fi
 echo "================================================================"
 echo "Using the following config:"
 
-vars=`compgen -A variable | grep '^OCTOPI_'`
+vars=`compgen -A variable | grep '^BEEWEBPI_'`
 for var in $vars
 do
 	echo "$var = ${!var}"

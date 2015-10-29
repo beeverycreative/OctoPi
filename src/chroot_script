@@ -15,7 +15,7 @@ apt-get update
 
 apt-get remove -y --purge scratch squeak-plugins-scratch squeak-vm wolfram-engine python-minecraftpi minecraft-pi sonic-pi oracle-java8-jdk
 
-#apt-get octoprint virtualenv
+#apt-get beeweb virtualenv
 apt-get -y --force-yes install python2.7 python-virtualenv python-dev git screen libts-bin subversion cmake checkinstall avahi-daemon libavahi-compat-libdnssd1
 
 pushd /home/pi
@@ -23,10 +23,10 @@ pushd /home/pi
   #build virtualenv
   sudo -u pi virtualenv --system-site-packages oprint
   
-  # OctoPrint & pyserial
-  if [ "$OCTOPI_INCLUDE_OCTOPRINT" == "yes" ]
+  # BEEweb & pyserial
+  if [ "$BEEWEBPI_INCLUDE_BEEWEB" == "yes" ]
   then
-    echo "--- Installing OctoPrint"
+    echo "--- Installing BEEweb"
     apt-get install -y --force-yes python-numpy python-netifaces
     apt-get remove -y python-serial
 
@@ -39,24 +39,24 @@ pushd /home/pi
     #pybonjour (for mdns discovery)
     sudo -u pi /home/pi/oprint/bin/pip install pybonjour
 
-    #OctoPrint
-    gitclone OCTOPI_OCTOPRINT_REPO OctoPrint
-    pushd OctoPrint
+    #BEEweb
+    gitclone BEEWEBPI_BEEWEB_REPO BEEweb
+    pushd BEEweb
       PIP_DEFAULT_TIMEOUT=60 sudo -u pi /home/pi/oprint/bin/python setup.py install
     popd
   fi
 
   #OctoPiPanel
-  if [ "$OCTOPI_INCLUDE_OCTOPIPANEL" == "yes" ]
+  if [ "$BEEWEBPI_INCLUDE_OCTOPIPANEL" == "yes" ]
   then
     echo "--- Installing OctoPiPanel"
-    gitclone OCTOPI_OCTOPIPANEL_REPO OctoPiPanel
+    gitclone BEEWEBPI_OCTOPIPANEL_REPO OctoPiPanel
     pushd OctoPiPanel
       sudo -u pi /home/pi/oprint/bin/pip install -r requirements.txt
     popd
 
     #Add fbcp for TFT screens
-    gitclone OCTOPI_FBCP_REPO rpi-fbcp
+    gitclone BEEWEBPI_FBCP_REPO rpi-fbcp
     pushd rpi-fbcp
       sudo -u pi mkdir build
       pushd build
@@ -69,11 +69,11 @@ pushd /home/pi
   fi
 
   #mjpg-streamer
-  if [ "$OCTOPI_INCLUDE_MJPGSTREAMER" == "yes" ]
+  if [ "$BEEWEBPI_INCLUDE_MJPGSTREAMER" == "yes" ]
   then
     echo "--- Installing mjpg-streamer"
     apt-get -y --force-yes install libjpeg8-dev imagemagick libav-tools libv4l-dev
-    gitclone OCTOPI_MJPGSTREAMER_REPO mjpg-streamer
+    gitclone BEEWEBPI_MJPGSTREAMER_REPO mjpg-streamer
     pushd mjpg-streamer
       mv mjpg-streamer-experimental/* .
       sudo -u pi make
@@ -81,33 +81,33 @@ pushd /home/pi
   fi
   
   #CuraEngine
-  if [ "$OCTOPI_INCLUDE_CURAENGINE" == "yes" ]
+  if [ "$BEEWEBPI_INCLUDE_CURAENGINE" == "yes" ]
   then
     echo "--- Installing CuraEngine"
-    folder=CuraEngine-$OCTOPI_CURAENGINE_VERSION
+    folder=CuraEngine-$BEEWEBPI_CURAENGINE_VERSION
     zipfile=$folder.zip
     apt-get -y install gcc-4.7 g++-4.7
-    sudo -u pi wget -O$zipfile $OCTOPI_CURAENGINE_ARCHIVE
+    sudo -u pi wget -O$zipfile $BEEWEBPI_CURAENGINE_ARCHIVE
     sudo -u pi unzip $zipfile
     pushd $folder
       sudo -u pi wget https://gist.githubusercontent.com/foosel/f86d6a729c0187ff8a82/raw/3d4f152b924080f502d887d11269f27a2389d64d/CuraEngine.patch
       sudo -u pi patch < CuraEngine.patch
-      sudo -u pi make CXX=g++-4.7 VERSION=$OCTOPI_CURAENGINE_VERSION
+      sudo -u pi make CXX=g++-4.7 VERSION=$BEEWEBPI_CURAENGINE_VERSION
       cp build/CuraEngine /usr/local/bin/cura_engine
     popd
     sudo -u pi rm -r $folder $zipfile
   fi
 
   #setup haproxy for http and https, and webcam
-  if [ "$OCTOPI_INCLUDE_HAPROXY" == "yes" ]
+  if [ "$BEEWEBPI_INCLUDE_HAPROXY" == "yes" ]
   then
     echo "--- Installing haproxy"
-    export HAPROXY_VERSION=OCTOPI_HAPROXY_VERSION
+    export HAPROXY_VERSION=BEEWEBPI_HAPROXY_VERSION
     sudo apt-get -y --force-yes install ssl-cert libssl-dev libpcre3-dev
     rm /etc/ssl/private/ssl-cert-snakeoil.key /etc/ssl/certs/ssl-cert-snakeoil.pem
-    sudo -u pi wget $OCTOPI_HAPROXY_ARCHIVE
-    sudo -u pi tar xzvf haproxy-$OCTOPI_HAPROXY_VERSION.tar.gz
-    rm haproxy-$OCTOPI_HAPROXY_VERSION.tar.gz
+    sudo -u pi wget $BEEWEBPI_HAPROXY_ARCHIVE
+    sudo -u pi tar xzvf haproxy-$BEEWEBPI_HAPROXY_VERSION.tar.gz
+    rm haproxy-$BEEWEBPI_HAPROXY_VERSION.tar.gz
     sudo -u pi mv `ls | grep haproxy | head -n 1` haproxy-ss
     pushd haproxy-ss
       sudo -u pi make TARGET=linux2628 USE_LINUX_SPLICE=1 USE_LINUX_TPROXY=1 USE_PCRE=1 USE_OPENSSL=1
@@ -120,10 +120,10 @@ pushd /home/pi
             --no-create-home --quiet --force-badname --group haproxy
   fi
 
-  if [ "$OCTOPI_INCLUDE_WIRINGPI" == "yes" ]
+  if [ "$BEEWEBPI_INCLUDE_WIRINGPI" == "yes" ]
   then
     echo "--- Installing WiringPi"
-    gitclone OCTOPI_WIRINGPI_REPO wiringPi
+    gitclone BEEWEBPI_WIRINGPI_REPO wiringPi
     pushd wiringPi
       sudo -u pi ./build
     popd
@@ -136,15 +136,15 @@ usermod -a -G tty pi
 usermod -a -G dialout pi
 
 # store octopi commit used to build this image
-echo "$OCTOPI_COMMIT" > /etc/octopi_commit
+echo "$BEEWEBPI_COMMIT" > /etc/octopi_commit
 
 # allow pi user to run shutdown and service commands
-echo "pi ALL=NOPASSWD: /sbin/shutdown" > /etc/sudoers.d/octoprint-shutdown
-echo "pi ALL=NOPASSWD: /sbin/service" > /etc/sudoers.d/octoprint-service
+echo "pi ALL=NOPASSWD: /sbin/shutdown" > /etc/sudoers.d/beeweb-shutdown
+echo "pi ALL=NOPASSWD: /sbin/service" > /etc/sudoers.d/beeweb-service
 
 #reach printer by name
-echo "$OCTOPI_OVERRIDE_HOSTNAME" > /etc/hostname
-sed -i -e "s@raspberrypi@$OCTOPI_OVERRIDE_HOSTNAME@g" /etc/hosts
+echo "$BEEWEBPI_OVERRIDE_HOSTNAME" > /etc/hostname
+sed -i -e "s@raspberrypi@$BEEWEBPI_OVERRIDE_HOSTNAME@g" /etc/hosts
 
 #make sure users don't run git with sudo, thus breaking permissions, by adding /root/bin to the
 #default sudo path and placing a git wrapper script there that checks if it's run as root
@@ -171,20 +171,20 @@ unpack /filesystem/root /
 #####################################################################
 ### setup services
 
-### OctoPrint
+### BEEweb
 
-if [ "$OCTOPI_INCLUDE_OCTOPRINT" == "yes" ]
+if [ "$BEEWEBPI_INCLUDE_BEEWEB" == "yes" ]
 then
-  update-rc.d octoprint defaults 95
+  update-rc.d beeweb defaults 95
 else
   # let's remove the configs for system services we don't need
-  rm /etc/init.d/octoprint
-  rm /etc/default/octoprint
+  rm /etc/init.d/beeweb
+  rm /etc/default/beeweb
 fi
 
 ### haproxy
 
-if [ "$OCTOPI_INCLUDE_HAPROXY" == "yes" ]
+if [ "$BEEWEBPI_INCLUDE_HAPROXY" == "yes" ]
 then
   update-rc.d gencert defaults
   update-rc.d haproxy defaults 99
@@ -196,22 +196,22 @@ else
   rm /etc/logrotate.d/haproxy
   rm /etc/rsyslog.d/49-haproxy.conf
 
-  # also we need to make OctoPrint bind to all interfaces because otherwise
+  # also we need to make BEEweb bind to all interfaces because otherwise
   # it will be unaccessible...
-  [ -f /etc/default/octoprint ] && sed -i "s@HOST=127.0.0.1@HOST=0.0.0.0@" /etc/default/octoprint 
+  [ -f /etc/default/beeweb ] && sed -i "s@HOST=127.0.0.1@HOST=0.0.0.0@" /etc/default/beeweb 
 fi
 
 ### CuraEngine
 
-if [ ! "$OCTOPI_INCLUDE_CURAENGINE" == "yes" ]
+if [ ! "$BEEWEBPI_INCLUDE_CURAENGINE" == "yes" ]
 then
-  # unconfigure the cura engine path in octoprint's config.yaml
-  sudo -u pi sed -i -e "s@cura_engine: /usr/local/bin/cura_engine@cura_engine:@g" /home/pi/.octoprint/config.yaml
+  # unconfigure the cura engine path in beeweb's config.yaml
+  sudo -u pi sed -i -e "s@cura_engine: /usr/local/bin/cura_engine@cura_engine:@g" /home/pi/.beeweb/config.yaml
 fi
 
 ### mjpg_streamer
 
-if [ "$OCTOPI_INCLUDE_MJPGSTREAMER" == "yes" ]
+if [ "$BEEWEBPI_INCLUDE_MJPGSTREAMER" == "yes" ]
 then
   # make webcamd autostart
   update-rc.d webcamd defaults
@@ -224,7 +224,7 @@ fi
 
 ### OctoPiPanel
 
-if [ ! "$OCTOPI_INCLUDE_OCTOPIPANEL" == "yes" ]
+if [ ! "$BEEWEBPI_INCLUDE_OCTOPIPANEL" == "yes" ]
 then
   # we don't need the tft setup stuff
   rm /home/pi/scripts/OctoPiPanel

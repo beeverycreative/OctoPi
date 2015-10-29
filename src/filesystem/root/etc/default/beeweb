@@ -1,7 +1,7 @@
-# Configuration for /etc/init.d/octoprint
+# Configuration for /etc/init.d/beeweb
 
 # The init.d script will only run if this variable non-empty.
-OCTOPRINT_USER=pi
+BEEWEB_USER=pi
 
 # To what host to bind daemon, default is 127.0.0.1
 HOST=127.0.0.1
@@ -10,7 +10,7 @@ HOST=127.0.0.1
 PORT=5000
 
 # Path to the OctoPrint executable, use this to override the default setting "/usr/bin/octoprint"
-DAEMON=/home/pi/oprint/bin/octoprint
+DAEMON=/home/pi/beewebapp/bin/beeweb
 
 # What arguments to pass to octoprint, usually no need to touch this
 DAEMON_ARGS="--host=$HOST --port=$PORT"

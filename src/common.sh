@@ -20,14 +20,14 @@ function pause() {
 }
 
 function gitclone(){
-  # call like this: gitclone OCTOPI_OCTOPRINT_REPO someDirectory -- this will do:
+  # call like this: gitclone BEEWEBPI_BEEWEB_REPO someDirectory -- this will do:
   #
-  #   sudo -u pi git clone -b $OCTOPI_OCTOPRINT_REPO_BRANCH $OCTOPI_OCTOPRINT_REPO_BUILD someDirectory
+  #   sudo -u pi git clone -b $BEEWEBPI_BEEWEB_REPO_BRANCH $BEEWEBPI_BEEWEB_REPO_BUILD someDirectory
   # 
-  # and if $OCTOPI_OCTOPRINT_REPO_BUILD != $OCTOPI_OCTOPRINT_REPO_SHIP also:
+  # and if $BEEWEBPI_BEEWEB_REPO_BUILD != $BEEWEBPI_BEEWEB_REPO_SHIP also:
   #
   #   pushd someDirectory
-  #     sudo -u pi git remote set-url origin $OCTOPI_OCTOPRINT_REPO_SHIP
+  #     sudo -u pi git remote set-url origin $BEEWEBPI_BEEWEB_REPO_SHIP
   #   popd
   # 
   # if second parameter is not provided last URL segment of the BUILD repo URL
@@ -110,7 +110,7 @@ function unmount_image() {
 function install_fail_on_error_trap() {
   set -e
   trap 'previous_command=$this_command; this_command=$BASH_COMMAND' DEBUG
-  trap 'if [ $? -ne 0 ]; then echo -e "\nexit $? due to $previous_command \nBUILD FAILED!" && echo "unmounting image..." && ( unmount_image $OCTOPI_MOUNT_PATH || true ); fi;' EXIT
+  trap 'if [ $? -ne 0 ]; then echo -e "\nexit $? due to $previous_command \nBUILD FAILED!" && echo "unmounting image..." && ( unmount_image $BEEWEBPI_MOUNT_PATH || true ); fi;' EXIT
 }
 
 function install_chroot_fail_on_error_trap() {

@@ -1,26 +1,26 @@
 #!/bin/sh
 
 ### BEGIN INIT INFO
-# Provides:          octoprint
+# Provides:          beeweb
 # Required-Start:    $local_fs networking
 # Required-Stop:
 # Should-Start:
 # Should-Stop:
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
-# Short-Description: OctoPrint daemon
-# Description:       Starts the OctoPrint daemon with the user specified in
-#                    /etc/default/octoprint.
+# Short-Description: BEEweb daemon
+# Description:       Starts the beeweb daemon with the user specified in
+#                    /etc/default/beeweb.
 ### END INIT INFO
 
-# Author: Sami Olmari
+# Author: David P.
 
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
-DESC="Octoprint Daemon"
-NAME="Octoprint"
-DAEMON=/usr/bin/octoprint
+DESC="BEEweb Daemon"
+NAME="BEEweb"
+DAEMON=/usr/bin/beeweb
 PIDFILE=/var/run/$NAME.pid
-PKGNAME=octoprint
+PKGNAME=beeweb
 SCRIPTNAME=/etc/init.d/$PKGNAME
 
 # Read configuration variable file if it is present
@@ -42,9 +42,9 @@ then
    exit 0
 fi
 
-if [ -z "$OCTOPRINT_USER" ]
+if [ -z "$BEEWEB_USER" ]
 then
-    log_warning_msg "Not starting $PKGNAME, OCTOPRINT_USER not set in /etc/default/$PKGNAME."
+    log_warning_msg "Not starting $PKGNAME, BEEWEB_USER not set in /etc/default/$PKGNAME."
     exit 0
 fi
 
@@ -73,7 +73,7 @@ do_start()
 
    if [ $RETVAL != 0 ]; then
        start-stop-daemon --start --background --quiet --pidfile $PIDFILE --make-pidfile \
-       --exec $DAEMON --chuid $OCTOPRINT_USER --user $OCTOPRINT_USER --umask $UMASK -- $DAEMON_ARGS
+       --exec $DAEMON --chuid $BEEWEB_USER --user $BEEWEB_USER --umask $UMASK -- $DAEMON_ARGS
        RETVAL="$?"
    fi
 }
@@ -89,7 +89,7 @@ do_stop()
    #   2 if daemon could not be stopped
    #   other if a failure occurred
 
-   start-stop-daemon --stop --quiet --retry=TERM/30/KILL/5 --user $OCTOPRINT_USER --pidfile $PIDFILE
+   start-stop-daemon --stop --quiet --retry=TERM/30/KILL/5 --user $BEEWEB_USER --pidfile $PIDFILE
    RETVAL="$?"
    [ "$RETVAL" = "2" ] && return 2
 
