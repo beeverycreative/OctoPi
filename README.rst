@@ -50,8 +50,8 @@ You can build it by issuing the following commands::
 
     sudo apt-get install realpath qemu-user-static
     
-    git clone https://github.com/guysoft/BEEwebPi.git
-    cd BEEwebPi/src/image
+    git clone https://github.com/guysoft/beewebpi.git
+    cd beewebpi/src/image
     curl -J -O -L  http://downloads.raspberrypi.org/raspbian_latest
     cd ..
     sudo modprobe loop
