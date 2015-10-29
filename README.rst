@@ -5,7 +5,7 @@ BEEwebPI
 .. :scale: 50 %
 .. :alt: BEEwebPI logo
 
-A `Raspberry Pi <http://www.raspberrypi.org/>`_ distribution for 3d printers based on the BEEwebPi project. It includes the `BEEweb <https://github.com/beeverycreative/BEEweb>`_ host software for 3d printers out of the box and `mjpg-streamer with RaspiCam support <https://github.com/jacksonliam/mjpg-streamer>`_ for live viewing of prints and timelapse video creation. This repository contains the source script to generate the distribution out of an existing `Raspbian <http://www.raspbian.org/>`_ distro image.
+A `Raspberry Pi <http://www.raspberrypi.org/>`_ distribution for 3d printers based on the OctoPi project. It includes the `BEEweb <https://github.com/beeverycreative/BEEweb>`_ host software for 3d printers out of the box and `mjpg-streamer with RaspiCam support <https://github.com/jacksonliam/mjpg-streamer>`_ for live viewing of prints and timelapse video creation. This repository contains the source script to generate the distribution out of an existing `Raspbian <http://www.raspbian.org/>`_ distro image.
 
 How to use it?
 --------------
