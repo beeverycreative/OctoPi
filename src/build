@@ -50,7 +50,7 @@ fi
 echo -e "--> Building VARIANT $BUILD_VARIANT, FLAVOR $BUILD_FLAVOR"
 
 source $BEEWEBPI_PATH/config
-[ "$CONFIG_ONLY" == "yes" ] || source $BEEWEBPI_PATH/octopi
+[ "$CONFIG_ONLY" == "yes" ] || source $BEEWEBPI_PATH/beewebpi
 EOF
 
 [ "$LOG" != "no" ] && (eval "$SCRIPT" 2>&1 | tee "$LOG") || eval "$SCRIPT"

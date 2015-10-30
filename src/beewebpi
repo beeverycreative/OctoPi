@@ -6,7 +6,7 @@
 source $BEEWEBPI_SCRIPT_PATH/common.sh
 
 function execute_chroot_script() {
-  #move BEEwebPi filesystem files
+  #move OctoPi filesystem files
   cp -vr --preserve=mode,timestamps $1/filesystem .
 
   #black magic of qemu-arm-static
