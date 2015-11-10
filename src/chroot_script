@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -x
 set -e
-# OctoPI generation script
-# Helper script that runs in a Raspbian chroot to create the OctoPI distro
+# BEEwebPI generation script
+# Helper script that runs in a Raspbian chroot to create the BEEwebPI distro
 # Written by Guy Sheffer <guysoft at gmail dot com>
 # GPL V3
 
@@ -135,8 +135,8 @@ popd
 usermod -a -G tty pi
 usermod -a -G dialout pi
 
-# store octopi commit used to build this image
-echo "$BEEWEBPI_COMMIT" > /etc/octopi_commit
+# store beewebpi commit used to build this image
+echo "$BEEWEBPI_COMMIT" > /etc/beewebpi_commit
 
 # allow pi user to run shutdown and service commands
 echo "pi ALL=NOPASSWD: /sbin/shutdown" > /etc/sudoers.d/beeweb-shutdown
@@ -156,14 +156,14 @@ echo "# enable raspicam" >> /boot/config.txt
 echo "start_x=1" >> /boot/config.txt
 echo "gpu_mem=128" >> /boot/config.txt
 
-# allow network configuration via /boot/octopi-network.txt
+# allow network configuration via /boot/beewebpi-network.txt
 sed -i "s@iface wlan0 @iface wlan0-raspbian @g" /etc/network/interfaces
 sed -i "s@iface wlan1 @iface wlan1-raspbian @g" /etc/network/interfaces
 echo "mapping wlan0" >> /etc/network/interfaces
 echo "  script /root/bin/map_iface" >> /etc/network/interfaces
 echo "mapping wlan1" >> /etc/network/interfaces
 echo "  script /root/bin/map_iface" >> /etc/network/interfaces
-echo "source /boot/octopi-network.txt" >> /etc/network/interfaces
+echo "source /boot/beewebpi-network.txt" >> /etc/network/interfaces
 
 #unpack root in the end, so etc file are not overwritten, might need to add two roots int he future
 unpack /filesystem/root /

@@ -52,7 +52,7 @@ You can build it by issuing the following commands::
     
     git clone https://github.com/guysoft/beewebpi.git
     cd beewebpi/src/image
-    curl -J -O -L  http://downloads.raspberrypi.org/raspbian_latest
+    curl -J -O -L  https://downloads.raspberrypi.org/raspbian/images/raspbian-2015-05-07/2015-05-05-raspbian-wheezy.zip
     cd ..
     sudo modprobe loop
     sudo bash -x ./build
