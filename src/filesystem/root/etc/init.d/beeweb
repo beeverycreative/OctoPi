@@ -26,7 +26,7 @@ SCRIPTNAME=/etc/init.d/$PKGNAME
 # Read configuration variable file if it is present
 [ -r /etc/default/$PKGNAME ] && . /etc/default/$PKGNAME
 
-# Exit if the octoprint is not installed
+# Exit if the beeweb is not installed
 [ -x "$DAEMON" ] || exit 0
 
 # Load the VERBOSE setting and other rcS variables

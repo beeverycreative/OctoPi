@@ -33,3 +33,6 @@ system:
     confirm: You are about to restart OctoPrint
     async: true
     ignore: true
+slicing:
+  defaultProfiles:
+    cura: a117_-_chocolate_brown_med_beethefirst

@@ -4,7 +4,7 @@
 BEEWEB_USER=pi
 
 # To what host to bind daemon, default is 127.0.0.1
-HOST=0.0.0.1
+HOST=0.0.0.0
 
 # On what port to run daemon, default is 5000
 PORT=5000

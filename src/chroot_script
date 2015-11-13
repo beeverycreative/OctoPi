@@ -31,11 +31,12 @@ pushd /home/pi
     apt-get remove -y python-serial
 
     #pyserial that can handle non-standard baud rates
-    sudo -u pi svn co http://pyserial.svn.sourceforge.net/svnroot/pyserial/trunk pyserial
-    pushd pyserial/pyserial
-      sudo -u pi /home/pi/oprint/bin/python setup.py install
-    popd
+    #sudo -u pi svn co http://pyserial.svn.sourceforge.net/svnroot/pyserial/trunk pyserial
+    #pushd pyserial/pyserial
+    #  sudo -u pi /home/pi/oprint/bin/python setup.py install
+    #popd
     
+
     #pybonjour (for mdns discovery)
     sudo -u pi /home/pi/oprint/bin/pip install pybonjour
 
@@ -234,6 +235,22 @@ then
   rm /boot/cmdline-pi-tft.txt
   rm /etc/udev/rules.d/95-ads7846.rules
 fi
+
+# removes the libusb-1.0-0 due to a bug with pyusb: https://github.com/walac/pyusb/issues/57
+apt-get remove -y libusb-1.0-0
+
+# compiles libusb
+apt-get -y install libtool autotools-dev automake
+
+git clone https://github.com/libusb/libusb
+pushd libusb
+	./bootstrap.sh
+	./configure --host=arm-linux-gnueabihf --disable-udev
+	make
+	sudo make install
+popd
+
+sudo usermod -a -G root pi
 
 #cleanup
 apt-get clean
