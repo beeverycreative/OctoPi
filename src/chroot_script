@@ -239,9 +239,10 @@ fi
 # removes the libusb-1.0-0 due to a bug with pyusb: https://github.com/walac/pyusb/issues/57
 apt-get remove -y libusb-1.0-0
 
-# compiles libusb
-apt-get -y install libtool autotools-dev automake
+# installs the necessary extra packages for BeeWeb
+apt-get -y install libtool autotools-dev automake bridge-utils iw dnsmasq
 
+# compiles libusb
 git clone https://github.com/libusb/libusb
 pushd libusb
 	./bootstrap.sh
@@ -251,6 +252,31 @@ pushd libusb
 popd
 
 sudo usermod -a -G root pi
+
+# compiles custom hostapd
+wget https://github.com/jenssegers/RTL8188-hostapd/archive/v2.0.tar.gz
+tar -zxvf v2.0.tar.gz
+pushd RTL8188-hostapd-2.0/hostapd
+	sudo make
+	sudo make install
+popd
+
+# replaces the dnsmasq.conf
+sudo cp /etc/dnsmasq.conf.dist /etc/dnsmasq.conf
+
+# replaces the hostapd.conf
+sudo cp /etc/hostapd/hostapd.conf.dist /etc/hostapd/hostapd.conf
+
+# removes the wpa_supplicant file to signal the AP mode script it can start
+sudo rm /etc/wpa_supplicant/wpa_supplicant.conf
+
+# gives the exec permissions to the scripts
+sudo chmod +x /etc/init.d/wifi_ap_mode
+sudo chmod +x /home/pi/wifi_ap_mode.sh
+sudo chmod +x /home/pi/wifi_client_mode.sh
+
+# creates the necessary init symlinks
+sudo update-rc.d wifi_ap_mode defaults
 
 #cleanup
 apt-get clean
