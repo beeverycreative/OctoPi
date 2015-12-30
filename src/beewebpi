@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # BEEwebPi generation script
-# This script takes a Raspbian image and adds to it BEEweb and verions addons
+# This script takes a Raspbian image and adds to it BEEweb and various addons
 # GPL V3
 
 source $BEEWEBPI_SCRIPT_PATH/common.sh

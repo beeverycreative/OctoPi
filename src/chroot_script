@@ -38,7 +38,7 @@ pushd /home/pi
     
 
     #pybonjour (for mdns discovery)
-    sudo -u pi /home/pi/oprint/bin/pip install pybonjour
+    sudo -u pi /home/pi/oprint/bin/python /home/pi/pybonjour-1.1.1/setup.py install
 
     #BEEweb
     gitclone BEEWEBPI_BEEWEB_REPO BEEweb
@@ -274,6 +274,7 @@ sudo rm /etc/wpa_supplicant/wpa_supplicant.conf
 sudo chmod +x /etc/init.d/wifi_ap_mode
 sudo chmod +x /home/pi/wifi_ap_mode.sh
 sudo chmod +x /home/pi/wifi_client_mode.sh
+sudo chmod +x /home/pi/hostname_upd.sh
 
 # creates the necessary init symlinks
 sudo update-rc.d wifi_ap_mode defaults
