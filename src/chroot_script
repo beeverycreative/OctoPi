@@ -275,6 +275,7 @@ sudo chmod +x /etc/init.d/wifi_ap_mode
 sudo chmod +x /home/pi/wifi_ap_mode.sh
 sudo chmod +x /home/pi/wifi_client_mode.sh
 sudo chmod +x /home/pi/hostname_upd.sh
+sudo chmod +x /home/pi/remove_wpa_supplicant_conf.sh
 
 # creates the necessary init symlinks
 sudo update-rc.d wifi_ap_mode defaults
