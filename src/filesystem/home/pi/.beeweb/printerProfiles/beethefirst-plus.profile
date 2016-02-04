@@ -19,9 +19,9 @@ extruder:
   - - 0.0
     - 0.0
 heatedBed: false
-id: beethefirst
-model: BEETHEFIRST
-name: BEETHEFIRST
+id: beethefirst-plus
+model: BEETHEFIRST+
+name: BEETHEFIRST+
 volume:
   depth: 135.0
   formFactor: rectangular
