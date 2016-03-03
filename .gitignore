@@ -1,2 +1,4 @@
 src/config.local
 src/image/*.zip
+workspace/
+src/build.log
