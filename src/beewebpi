@@ -36,18 +36,45 @@ pushd $BEEWEBPI_WORKSPACE
   fi
   unzip $BEEWEBPI_ZIP_IMG
   BEEWEBPI_IMG_PATH=`ls | grep .img`
+  export BEEWEBPI_BUILDBASE=$(basename $BEEWEBPI_IMG_PATH)
+
+  if [ -n "$BEEWEBPI_IMAGE_ENLARGEROOT" ]
+  then
+    # make our image a bit larger so we don't run into size problems...
+    enlarge_ext $BEEWEBPI_IMG_PATH 2 $BEEWEBPI_IMAGE_ENLARGEROOT
+  fi
 
   # mount root and boot partition
   mount_image $BEEWEBPI_IMG_PATH $BEEWEBPI_MOUNT_PATH
+  if [ -n "$BEEWEBPI_APT_CACHE" ]
+  then
+    mkdir -p "$BEEWEBPI_APT_CACHE"
+    mount --bind "$BEEWEBPI_APT_CACHE" $BEEWEBPI_MOUNT_PATH/var/cache/apt
+  fi
 
   #Edit pi filesystem
   pushd $BEEWEBPI_MOUNT_PATH
+    #Put git clones in place
+
+    pushd home/pi
+        gitclone BEEWEBPI_BEEWEB_REPO BEEWeb
+        gitclone BEEWEBPI_FBCP_REPO rpi-fbcp
+        gitclone BEEWEBPI_MJPGSTREAMER_REPO mjpg-streamer
+    popd
 
     #make QEMU boot (remember to return)
     fixLd
     #sed -i 's@include /etc/ld.so.conf.d/\*.conf@\#include /etc/ld.so.conf.d/\*.conf@' etc/ld.so.conf
+
+    # if an additional pre-script is defined, execute that now
+    if [ -n "$BEEWEBPI_PRESCRIPT" ] && [ -f $BEEWEBPI_PRESCRIPT/chroot_script ]; then
+      echo "Injecting environment pre script from $BEEWEBPI_PRESCRIPT..."
+      execute_chroot_script $BEEWEBPI_PRESCRIPT $BEEWEBPI_PRESCRIPT/chroot_script
+    fi
+
     # if building a variant, execute its pre-chroot script
     if [ -n "$VARIANT_BASE" ] && [ -f $VARIANT_BASE/pre_chroot_script ]; then
+      echo "Injecting variant pre script from $VARIANT_BASE..."
       execute_chroot_script $VARIANT_BASE $VARIANT_BASE/pre_chroot_script
     fi
  
@@ -56,14 +83,27 @@ pushd $BEEWEBPI_WORKSPACE
     
     # if building a variant, execute its post-chroot script
     if [ -n "$VARIANT_BASE" ] && [ -f $VARIANT_BASE/post_chroot_script ]; then
+      echo "Injecting variant post script from $VARIANT_BASE..."
       execute_chroot_script $VARIANT_BASE $VARIANT_BASE/post_chroot_script
     fi
-    
+
+    # if an additional post-script is defined, execute that now
+    if [ -n "$BEEWEBPI_POSTSCRIPT" ] && [ -f $BEEWEBPI_POSTSCRIPT/chroot_script ]; then
+      echo "Injecting environment post script from $BEEWEBPI_POSTSCRIPT..."
+      execute_chroot_script $BEEWEBPI_POSTSCRIPT $BEEWEBPI_POSTSCRIPT/chroot_script
+    fi
+
     restoreLd
   popd
   
   # unmount first boot, then root partition
   unmount_image $BEEWEBPI_MOUNT_PATH
   chmod 777 $BEEWEBPI_IMG_PATH
+
+  if [ -n "$BEEWEBPI_IMAGE_RESIZEROOT" ]
+  then
+    # resize image to minimal size + provided size
+    minimize_ext $BEEWEBPI_IMG_PATH 2 $BEEWEBPI_IMAGE_RESIZEROOT
+  fi
 popd
 
