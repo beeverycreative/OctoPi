@@ -5,7 +5,7 @@ BEEwebPI
 .. :scale: 50 %
 .. :alt: BEEwebPI logo
 
-A `Raspberry Pi <http://www.raspberrypi.org/>`_ distribution for 3d printers based on the OctoPi project. It includes the `BEEweb <https://github.com/beeverycreative/BEEweb>`_ host software for 3d printers out of the box and `mjpg-streamer with RaspiCam support <https://github.com/jacksonliam/mjpg-streamer>`_ for live viewing of prints and timelapse video creation. This repository contains the source script to generate the distribution out of an existing `Raspbian <http://www.raspbian.org/>`_ distro image.
+A `Raspberry Pi <http://www.raspberrypi.org/>`_ distribution for 3d printers based on the OctoPi project. It includes the `Beesoft.web <https://github.com/beeverycreative/BEEweb>`_ host software for 3d printers out of the box and `mjpg-streamer with RaspiCam support <https://github.com/jacksonliam/mjpg-streamer>`_ for live viewing of prints and timelapse video creation. This repository contains the source script to generate the distribution out of an existing `Raspbian <http://www.raspbian.org/>`_ distro image.
 
 How to use it?
 --------------
@@ -15,9 +15,9 @@ How to use it?
 #. Boot the Pi from the card
 #. Log into your Pi via SSH (it is located at ``beewebpi.local`` `if your computer supports bonjour <https://learn.adafruit.com/bonjour-zeroconf-networking-for-windows-and-linux/overview>`_ or the IP address assigned by your router), default username is "pi", default password is "raspberry", change the password using the ``passwd`` command and expand the filesystem of the SD card through the corresponding option when running ``sudo raspi-config``.
 
-BEEweb is located at `http://beeweb.local <http://beeweb.local>`_ and also at `https://beeweb.local <https://beeweb.local>`_. Since the SSL certificate is self signed (and generated upon first boot), you will get a certificate warning at the latter location, please ignore it.
+BEEweb is located at `http://beesoft-pi.local <http://beesoft-pi.local>`_ and also at `https://beesoft-pi.local <https://beesoft-pi.local>`_. Since the SSL certificate is self signed (and generated upon first boot), you will get a certificate warning at the latter location, please ignore it.
 
-If a USB webcam or the Raspberry Pi camera is detected, MJPG-streamer will be started automatically as webcam server. OctoPrint on BEEwebPi ships with correctly configured stream and snapshot URLs pointing at it. If necessary, you can reach it under `http://beeweb.local/webcam/?action=stream <beeweb.local/webcam/?action=stream>`_ and SSL respectively, or directly on its configured port 8080: `http://beeweb.local:8080/?action=stream <beeweb.local:8080/?action=stream>`_.
+If a USB webcam or the Raspberry Pi camera is detected, MJPG-streamer will be started automatically as webcam server. OctoPrint on BEEwebPi ships with correctly configured stream and snapshot URLs pointing at it. If necessary, you can reach it under `http://beesoft-pi.local/webcam/?action=stream <beesoft-pi.local/webcam/?action=stream>`_ and SSL respectively, or directly on its configured port 8080: `http://beesoft-pi.local:8080/?action=stream <beesoft-pi.local:8080/?action=stream>`_.
 
 CuraEngine is installed and BEEweb ships pre-configured with the correct path to utilize it for on-board-slicing. Just import a Cura Slicing Profile in BEEweb's settings and start slicing directly on your Pi.
 
@@ -50,9 +50,9 @@ You can build it by issuing the following commands::
 
     sudo apt-get install realpath qemu-user-static automake gcc-arm-linux-gnueabihf libudev-dev
     
-    git clone https://github.com/guysoft/beewebpi.git
+    git clone https://github.com/beeverycreative/beewebpi.git
     cd beewebpi/src/image
-    curl -J -O -L  https://downloads.raspberrypi.org/raspbian/images/raspbian-2015-05-07/2015-05-05-raspbian-wheezy.zip
+    curl -J -O -L  https://downloads.raspberrypi.org/raspbian/images/raspbian-2016-02-29/2016-02-26-raspbian-jessie.zip
     cd ..
     sudo modprobe loop
     sudo bash -x ./build
