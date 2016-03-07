@@ -55,7 +55,7 @@ fi
 # an alternative pypi index url to use, e.g. a proxy such as devpi
 [ -n "$BEEWEBPI_PYPI_INDEX" ] || BEEWEBPI_PYPI_INDEX=
 
-[ -n "$BEEWEBPI_OVERRIDE_HOSTNAME" ] || BEEWEBPI_OVERRIDE_HOSTNAME=beewebpi
+[ -n "$BEEWEBPI_OVERRIDE_HOSTNAME" ] || BEEWEBPI_OVERRIDE_HOSTNAME=beesoft-pi
 
 # a git mirror to use for git clones instead of original remotes
 [ -n "$BEEWEBPI_BUILD_REPO_MIRROR" ] || BEEWEBPI_BUILD_REPO_MIRROR=
