@@ -57,7 +57,7 @@ pushd $BEEWEBPI_WORKSPACE
     #Put git clones in place
 
     pushd home/pi
-        gitclone BEEWEBPI_BEEWEB_REPO BEEWeb
+        gitclone BEEWEBPI_BEEWEB_REPO BEEweb
         gitclone BEEWEBPI_FBCP_REPO rpi-fbcp
         gitclone BEEWEBPI_MJPGSTREAMER_REPO mjpg-streamer
     popd
