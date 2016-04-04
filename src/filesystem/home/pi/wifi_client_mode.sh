@@ -1,13 +1,12 @@
 #!/bin/bash
 
-sudo rm /etc/wpa_supplicant/wpa_supplicant.conf
-sudo cp /home/pi/wpa_supplicant_update.conf /etc/wpa_supplicant/wpa_supplicant.conf
+sudo pkill hostapd
+sudo pkill dhcpcd
 
-sudo rm /etc/network/interfaces
-sudo cp /etc/network/interfaces_normal.dist /etc/network/interfaces
+sudo ip link set wlan0 down
+sudo ip addr flush dev wlan0
+sudo ip link set wlan0 up
 
-sudo service hostapd stop
-sudo service networking restart
+sudo wpa_supplicant -D nl80211,wext -c /etc/wpa_supplicant/wpa_supplicant.conf -i wlan0
+sudo dhcpcd wlan0 &
 
-sudo ifdown wlan0
-sudo ifup wlan0
