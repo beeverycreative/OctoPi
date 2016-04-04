@@ -294,19 +294,35 @@ popd
 
 sudo usermod -a -G root pi
 
+# usbutils for lsusb and vim... just because :)
+apt-get install -y usbutils vim
+
 # compiles custom hostapd
-wget https://github.com/jenssegers/RTL8188-hostapd/archive/v2.0.tar.gz
-tar -zxvf v2.0.tar.gz
-pushd RTL8188-hostapd-2.0/hostapd
-	sudo make
-	sudo make install
+apt-get remove -y hostapd
+apt-get install -y libnl-dev
+pushd /root/
+    wget https://w1.fi/releases/hostapd-2.5.tar.gz
+    tar -zxvf hostapd-2.5.tar.gz
+    pushd hostapd-2.5/
+        wget https://raw.githubusercontent.com/pritambaral/hostapd-rtl871xdrv/hostapd_2_5/rtlxdrv.patch
+        patch -Np1 -i rtlxdrv.patch
+        pushd hostapd/
+            cp defconfig .config
+            echo CONFIG_DRIVER_RTW=y >> .config
+            make
+            sudo make install
+        popd
+    popd
 popd
+
+sudo systemctl disable networking
+sudo systemctl disable dhcpcd
 
 # replaces the dnsmasq.conf
 sudo cp /etc/dnsmasq.conf.dist /etc/dnsmasq.conf
 
 # replaces the hostapd.conf
-sudo cp /etc/hostapd/hostapd.conf.dist /etc/hostapd/hostapd.conf
+# sudo cp /etc/hostapd/hostapd.conf.dist /etc/hostapd/hostapd.conf
 
 # removes the wpa_supplicant file to signal the AP mode script it can start
 sudo rm /etc/wpa_supplicant/wpa_supplicant.conf
