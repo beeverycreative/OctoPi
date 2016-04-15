@@ -216,9 +216,11 @@ unpack /filesystem/root /
 ### setup services
 
 ### Disable GUI at start
-systemctl_if_exists disable lightdm.service
+sudo systemctl disable lightdm.service
+sudo update-rc.d lightdm remove
 
-update-rc.d prepare_resize defaults
+### Expand filesystem at first boot
+sudo update-rc.d prepare_resize defaults
 
 ### BEEweb
 
@@ -319,6 +321,7 @@ popd
 
 sudo systemctl disable networking
 sudo systemctl disable dhcpcd
+sudo systemctl disable dnsmasq
 
 # replaces the dnsmasq.conf
 sudo cp /etc/dnsmasq.conf.dist /etc/dnsmasq.conf
