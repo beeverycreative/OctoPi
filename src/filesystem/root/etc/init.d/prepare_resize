@@ -12,14 +12,6 @@
 . /lib/lsb/init-functions
 
 do_start () {
-  . /boot/octopi.txt
-
-  if [ "$perform_resize" != "yes" ]
-  then
-    log_failure_msg "Resize on boot is disabled"
-    exit 1
-  fi
-
   /usr/bin/raspi-config --expand-rootfs >> /var/log/prepare_resize
   /usr/sbin/update-rc.d prepare_resize remove >> /var/log/prepare_resize
 

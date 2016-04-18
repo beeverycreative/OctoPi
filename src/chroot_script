@@ -216,11 +216,11 @@ unpack /filesystem/root /
 ### setup services
 
 ### Disable GUI at start
-sudo systemctl disable lightdm.service
-sudo update-rc.d lightdm remove
+systemctl set-default multi-user.target
+ln -fs /etc/systemd/system/autologin@.service /etc/systemd/system/getty.target.wants/getty@tty1.service
 
 ### Expand filesystem at first boot
-sudo update-rc.d prepare_resize defaults
+update-rc.d prepare_resize defaults
 
 ### BEEweb
 
