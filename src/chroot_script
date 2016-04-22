@@ -195,6 +195,11 @@ chmod +x /root/bin/git
 echo "# enable raspicam" >> /boot/config.txt
 echo "start_x=1" >> /boot/config.txt
 echo "gpu_mem=128" >> /boot/config.txt
+echo "" >> /boot/config.txt
+
+# enable display
+echo "# enable display" >> /boot/config.txt
+echo "dtoverlay=piscreen,speed=16000000,rotate=90" >> /boot/config.txt
 
 # allow network configuration via /boot/beewebpi-network.txt
 sed -i "s@iface wlan0 @iface wlan0-raspbian @g" /etc/network/interfaces
@@ -319,9 +324,18 @@ pushd /root/
     popd
 popd
 
-sudo systemctl disable networking
-sudo systemctl disable dhcpcd
-sudo systemctl disable dnsmasq
+# install kivy
+sudo apt-get install libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev \
+                     pkg-config libgl1-mesa-dev libgles2-mesa-dev \
+                     python-setuptools libgstreamer1.0-dev git-core \
+                     gstreamer1.0-plugins-{bad,base,good,ugly} \
+                     gstreamer1.0-{omx,alsa} python-dev cython
+
+sudo -u pi /home/pi/oprint/bin/pip git+https://github.com/kivy/kivy.git@master
+
+sudo update-rc.d networking disable
+sudo update-rc.d dhcpcd disable
+sudo update-rc.d dnsmasq disable
 
 # replaces the dnsmasq.conf
 sudo cp /etc/dnsmasq.conf.dist /etc/dnsmasq.conf
