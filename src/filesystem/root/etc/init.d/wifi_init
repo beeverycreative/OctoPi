@@ -17,9 +17,8 @@
 
 if [ ! -f /etc/wpa_supplicant/wpa_supplicant.conf ]; then
 	echo "Switching WiFi to AP mode..."
-	/bin/bash /home/pi/wifi_ap_mode.sh
+	/bin/bash /home/pi/wifi_ap_mode.sh &
 else
     echo "Client mode..."
-    /bin/bash /home/pi/wifi_client_mode.sh
+    /bin/bash /home/pi/wifi_client_mode.sh &
 fi
-

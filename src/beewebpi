@@ -60,6 +60,9 @@ pushd $BEEWEBPI_WORKSPACE
         gitclone BEEWEBPI_BEEWEB_REPO BEEweb
         gitclone BEEWEBPI_FBCP_REPO rpi-fbcp
         gitclone BEEWEBPI_MJPGSTREAMER_REPO mjpg-streamer
+        gitclone BEEWEBPI_KIVY_REPO kivy
+        gitclone BEEWEBPI_BEEPANEL_REPO kivy-test
+        gitclone BEEWEBPI_LIBUSB_REPO libusb
     popd
 
     #make QEMU boot (remember to return)
