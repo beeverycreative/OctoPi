@@ -102,25 +102,41 @@ pushd /home/pi
     popd
   fi
 
-  #OctoPiPanel
-  if [ "$BEEWEBPI_INCLUDE_OCTOPIPANEL" == "yes" ]
+  # BEEPANEL
+  if [ "$BEEWEBPI_INCLUDE_BEEPANEL" == "yes" ]
   then
-    echo "--- Installing OctoPiPanel"
-    chown -R pi:pi OctoPiPanel
-    pushd OctoPiPanel
-      sudo -u pi /home/pi/oprint/bin/pip install -r requirements.txt
+    echo "--- Installing BEEPANEL"
+    
+    # install kivy dependencies
+    apt-get install -y  libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev \
+                        pkg-config libgl1-mesa-dev libgles2-mesa-dev \
+                        python-setuptools libgstreamer1.0-dev git-core \
+                        gstreamer1.0-plugins-{bad,base,good,ugly} \
+                        gstreamer1.0-{omx,alsa} python-dev cython \
+                        python-pip python-netifaces libmtdev1
+    pip install --upgrade pip
+    pip install --upgrade virtualenv
+    pip install python-wifi
+
+    # patch kivy, to fix inverted coordinates in screen, and install it
+    pushd /home/pi/kivy
+        cp /home/pi/hidinput.patch /home/pi/kivy
+        patch -Np1 -i hidinput.patch
+        #make
+        #echo "export PYTHONPATH=$(pwd):\$PYTHONPATH" >> /home/pi/.profile
     popd
+    pip install /home/pi/kivy
 
     #Add fbcp for TFT screens
     chown -R pi:pi rpi-fbcp
     pushd rpi-fbcp
-      sudo -u pi mkdir build
-      pushd build
-        sudo -u pi cmake ..
-        sudo -u pi make
-        install fbcp /usr/local/bin/fbcp
-        sudo -u pi make clean
-      popd
+        sudo -u pi mkdir build
+        pushd build
+            sudo -u pi cmake ..
+            sudo -u pi make
+            install fbcp /usr/local/bin/fbcp
+            sudo -u pi make clean
+        popd
     popd
   fi
 
@@ -195,6 +211,11 @@ chmod +x /root/bin/git
 echo "# enable raspicam" >> /boot/config.txt
 echo "start_x=1" >> /boot/config.txt
 echo "gpu_mem=128" >> /boot/config.txt
+echo "" >> /boot/config.txt
+
+# enable display
+echo "# enable display" >> /boot/config.txt
+echo "dtoverlay=piscreen,speed=16000000,rotate=90" >> /boot/config.txt
 
 # allow network configuration via /boot/beewebpi-network.txt
 sed -i "s@iface wlan0 @iface wlan0-raspbian @g" /etc/network/interfaces
@@ -216,8 +237,10 @@ unpack /filesystem/root /
 ### setup services
 
 ### Disable GUI at start
-systemctl_if_exists disable lightdm.service
+systemctl set-default multi-user.target
+ln -fs /etc/systemd/system/autologin@.service /etc/systemd/system/getty.target.wants/getty@tty1.service
 
+### Expand filesystem at first boot
 update-rc.d prepare_resize defaults
 
 ### BEEweb
@@ -266,19 +289,6 @@ else
   rm /root/bin/webcamd
 fi
 
-### OctoPiPanel
-
-if [ ! "$BEEWEBPI_INCLUDE_OCTOPIPANEL" == "yes" ]
-then
-  # we don't need the tft setup stuff
-  rm /home/pi/scripts/OctoPiPanel
-  rm /home/pi/scripts/calibrate-rpi-display
-  rm /home/pi/scripts/enable-adafruit-pitft
-  rm /home/pi/scripts/enable-rpi-display
-  rm /boot/cmdline-pi-tft.txt
-  rm /etc/udev/rules.d/95-ads7846.rules
-fi
-
 # removes the libusb-1.0-0 due to a bug with pyusb: https://github.com/walac/pyusb/issues/57
 apt-get remove -y libusb-1.0-0
 
@@ -286,42 +296,57 @@ apt-get remove -y libusb-1.0-0
 apt-get -y install libtool autotools-dev automake bridge-utils iw dnsmasq
 
 # compiles libusb
-git clone https://github.com/libusb/libusb
-pushd libusb
+pushd /home/pi/libusb
 	./bootstrap.sh
 	./configure --host=arm-linux-gnueabihf --disable-udev
 	make
-	sudo make install
+	make install
 popd
 
-sudo usermod -a -G root pi
+usermod -a -G root pi
+
+# usbutils for lsusb and vim... just because :)
+apt-get install -y usbutils vim
 
 # compiles custom hostapd
-wget https://github.com/jenssegers/RTL8188-hostapd/archive/v2.0.tar.gz
-tar -zxvf v2.0.tar.gz
-pushd RTL8188-hostapd-2.0/hostapd
-	sudo make
-	sudo make install
+apt-get remove -y hostapd
+apt-get install -y libnl-dev
+pushd /root/
+    wget https://w1.fi/releases/hostapd-2.5.tar.gz
+    tar -zxvf hostapd-2.5.tar.gz
+    pushd hostapd-2.5/
+        wget https://raw.githubusercontent.com/pritambaral/hostapd-rtl871xdrv/hostapd_2_5/rtlxdrv.patch
+        patch -Np1 -i rtlxdrv.patch
+        pushd hostapd/
+            cp defconfig .config
+            echo CONFIG_DRIVER_RTW=y >> .config
+            echo CONFIG_IEEE80211N=y >> .config
+            make
+            make install
+        popd
+    popd
 popd
 
-# replaces the dnsmasq.conf
-sudo cp /etc/dnsmasq.conf.dist /etc/dnsmasq.conf
 
-# replaces the hostapd.conf
-sudo cp /etc/hostapd/hostapd.conf.dist /etc/hostapd/hostapd.conf
+update-rc.d networking disable
+update-rc.d dhcpcd disable
+update-rc.d dnsmasq disable
+
+# replaces the dnsmasq.conf
+cp /etc/dnsmasq.conf.dist /etc/dnsmasq.conf
 
 # removes the wpa_supplicant file to signal the AP mode script it can start
-sudo rm /etc/wpa_supplicant/wpa_supplicant.conf
+rm /etc/wpa_supplicant/wpa_supplicant.conf
 
 # gives the exec permissions to the scripts
-sudo chmod +x /etc/init.d/wifi_ap_mode
-sudo chmod +x /home/pi/wifi_ap_mode.sh
-sudo chmod +x /home/pi/wifi_client_mode.sh
-sudo chmod +x /home/pi/hostname_upd.sh
-sudo chmod +x /home/pi/remove_wpa_supplicant_conf.sh
+chmod +x /home/pi/wifi_ap_mode.sh
+chmod +x /home/pi/wifi_client_mode.sh
+chmod +x /home/pi/hostname_upd.sh
+chmod +x /home/pi/remove_wpa_supplicant_conf.sh
 
 # creates the necessary init symlinks
-sudo update-rc.d wifi_ap_mode defaults
+update-rc.d wifi_init defaults
+update-rc.d kivy_init defaults
 
 #cleanup
 apt-get clean

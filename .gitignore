@@ -1,5 +1,5 @@
 src/config.local
 src/image/*.zip
 **/key.json
-workspace/
+workspace*/
 src/build.log

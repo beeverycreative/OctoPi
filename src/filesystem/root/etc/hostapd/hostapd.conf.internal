@@ -24,10 +24,5 @@ eap_reauth_period=360000000
 
 # Hardware configuration
 
-driver=rtl871xdrv
-#ieee80211n=1
+driver=nl80211
 hw_mode=g
-device_name=RTL8192CU
-manufacturer=Realtek
-ctrl_interface=wlan0
-ctrl_interface_group=0
