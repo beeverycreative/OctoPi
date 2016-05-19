@@ -39,7 +39,6 @@ chmod +x /usr/sbin/policy-rc.d
 
 unpack /filesystem/home/pi /home/pi pi
 unpack /filesystem/home/root /root root
-unpack /filesystem/boot /boot
 apt-get update
 
 # in case we are building from a regular raspbian image instead of the lite one...
