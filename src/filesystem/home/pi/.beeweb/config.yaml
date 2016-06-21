@@ -10,8 +10,8 @@ plugins:
   softwareupdate:
     checks:
       octoprint:
-        update_folder: /home/pi/OctoPrint
-    octoprint_restart_command: sudo service octoprint restart
+        update_folder: /home/pi/BEEweb
+    octoprint_restart_command: sudo service beeweb restart
     environment_restart_command: sudo shutdown -r now
 system:
   actions:
@@ -27,10 +27,10 @@ system:
     confirm: You are about to reboot the system
     async: true
     ignore: true
-  - name: Restart OctoPrint
-    command: sudo service octoprint restart
+  - name: Restart BEEsoft
+    command: sudo service beeweb restart
     action: restart
-    confirm: You are about to restart OctoPrint
+    confirm: You are about to restart BEEsoft.web
     async: true
     ignore: true
 slicing:
