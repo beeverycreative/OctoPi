@@ -11,6 +11,8 @@ plugins:
     checks:
       octoprint:
         update_folder: /home/pi/BEEweb
+      BEEsoft Configurations:
+        checkout_folder: /home/pi/beewebpi-repo
     octoprint_restart_command: sudo service beeweb restart
     environment_restart_command: sudo shutdown -r now
 system:
@@ -36,3 +38,7 @@ system:
 slicing:
   defaultProfiles:
     cura: a117_-_chocolate_brown_med_beethefirst
+server:
+  commands:
+    serverRestartCommand: sudo service beeweb restart
+    systemRestartCommand: sudo shutdown -r now

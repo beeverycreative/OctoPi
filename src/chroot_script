@@ -139,6 +139,14 @@ pushd /home/pi
     popd
   fi
 
+
+  # BEEWEBPI
+  if [ "$BEEWEBPI_INCLUDE_BEEWEBPI" == "yes" ]
+  then
+    echo "--- Installing BEEWEBPI (self)"
+    chown -R pi:pi beewebpi-repo
+  fi
+
   #mjpg-streamer
   if [ "$BEEWEBPI_INCLUDE_MJPGSTREAMER" == "yes" ]
   then
