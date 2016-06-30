@@ -11,7 +11,7 @@ plugins:
     checks:
       octoprint:
         update_folder: /home/pi/BEEweb
-      BEEsoft Configurations:
+      BEEsoft configurations:
         checkout_folder: /home/pi/beewebpi-repo
     octoprint_restart_command: sudo service beeweb restart
     environment_restart_command: sudo shutdown -r now
