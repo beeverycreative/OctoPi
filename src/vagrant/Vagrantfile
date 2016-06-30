@@ -1,7 +1,12 @@
-Vagrant.configure("2") do |o|
-    o.vm.box= "https://github.com/kraksoft/vagrant-box-ubuntu/releases/download/15.04/ubuntu-15.04-amd64.box"
-    o.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
-    o.vm.synced_folder "../../", "/BEEwebPi", create:true, type: "nfs"
-    o.vm.network :private_network, ip: "192.168.55.55"
-    o.vm.provision :shell, :path => "setup.sh", args: ENV['SHELL_ARGS']
+Vagrant.configure("2") do |config|
+    config.vm.box= "https://github.com/kraksoft/vagrant-box-ubuntu/releases/download/15.04/ubuntu-15.04-amd64.box"
+    config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
+    config.vm.synced_folder "../../", "/home/vagrant/BEEwebPi", create:true, type: "nfs"
+    config.vm.network :private_network, ip: "192.168.55.55"
+    config.vm.provision :shell, :path => "setup.sh", args: ENV['SHELL_ARGS']
+
+    config.vm.provider :virtualbox do |vb, override|
+        nfs_setting = RUBY_PLATFORM =~ /darwin/ || RUBY_PLATFORM =~ /linux/
+    end
 end
+
