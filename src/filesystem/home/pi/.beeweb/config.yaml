@@ -37,7 +37,7 @@ system:
     ignore: true
 slicing:
   defaultProfiles:
-    cura: a117_-_chocolate_brown_med_beethefirst
+    cura: a023_-_black_med_beethefirst
 server:
   commands:
     serverRestartCommand: sudo service beeweb restart
