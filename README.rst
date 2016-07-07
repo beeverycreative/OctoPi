@@ -72,6 +72,3 @@ Usage
 #. If needed, override existing config settings by creating a new file ``src/config.local``. You can override all settings found in ``src/config``. If you need to override the path to the Raspbian image to use for building BEEwebPi, override the path to be used in ``ZIP_IMG``. By default the most recent file matching ``*-raspbian.zip`` found in ``src/image`` will be used.
 #. Run ``src/build`` as root.
 #. The final image will be created at the ``src/workspace``
-
-...
-...
