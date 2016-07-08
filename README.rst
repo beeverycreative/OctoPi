@@ -52,7 +52,7 @@ You can build it by issuing the following commands::
     
     git clone https://github.com/beeverycreative/beewebpi.git
     cd beewebpi/src/image
-    curl -J -O -L  https://downloads.raspberrypi.org/raspbian/images/raspbian-2016-02-29/2016-02-26-raspbian-jessie.zip
+    curl -J -O -L  https://downloads.raspberrypi.org/raspbian_lite_latest
     cd ..
     sudo modprobe loop
     sudo bash -x ./build
@@ -72,4 +72,3 @@ Usage
 #. If needed, override existing config settings by creating a new file ``src/config.local``. You can override all settings found in ``src/config``. If you need to override the path to the Raspbian image to use for building BEEwebPi, override the path to be used in ``ZIP_IMG``. By default the most recent file matching ``*-raspbian.zip`` found in ``src/image`` will be used.
 #. Run ``src/build`` as root.
 #. The final image will be created at the ``src/workspace``
-
