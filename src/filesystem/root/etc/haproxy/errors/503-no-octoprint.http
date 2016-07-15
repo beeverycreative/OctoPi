@@ -69,7 +69,7 @@ Content-Type: text/html
     </head>
     <body>
         <div class="wrapper">
-            <h1>The OctoPrint server is currently not running</h1>
+            <h1>The BEEsoft.web server is currently not running</h1>
 
             <p>
                 If you just started up your Raspberry Pi, please wait a couple of seconds, then
@@ -83,27 +83,26 @@ Content-Type: text/html
             <ul>
                 <li>
                     Verify that the process is running:
-                    <code>ps -ef | grep -i octoprint</code> should show a
+                    <code>ps -ef | grep -i beeweb</code> should show a
                     python process.
                 </li>
                 <li>
                     If it isn't, the question is why. Take a look into
-                    <code>~/.octoprint/logs/octoprint.log</code>, there might
+                    <code>~/.beeweb/logs/octoprint.log</code>, there might
                     be an error logged in there that helps to determine
                     what's wrong.
                 </li>
                 <li>
                     You might also want to try if you can restart the server
                     (if no obvious error is visible):
-                    <code>sudo service octoprint restart</code>.
+                    <code>sudo service beeweb restart</code>.
                 </li>
             </ul>
 
             <p>
                 If all that doesn't help to trouble shoot the issue, you can seek
                 support on the
-                <a href="https://groups.google.com/group/octoprint">OctoPrint Mailinglist</a>
-                or in the <a href="https://plus.google.com/communities/102771308349328485741">OctoPrint G+ Community</a>.
+                <a href="https://beeverycreative.com/forum/">BeeVeryCreative Forum</a>
             </p>
         </div>
     </body>
