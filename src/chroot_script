@@ -92,7 +92,7 @@ pushd /home/pi
     echo "--- Installing BEEweb"
 
     #pybonjour (for mdns discovery)
-    sudo -u pi /home/pi/oprint/bin/pip install https://pybonjour.googlecode.com/files/pybonjour-1.1.1.tar.gz
+    sudo -u pi /home/pi/oprint/bin/pip install https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/pybonjour/pybonjour-1.1.1.tar.gz
 
     #BEEweb
     chown -R pi:pi BEEweb
