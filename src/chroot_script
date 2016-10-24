@@ -107,23 +107,25 @@ pushd /home/pi
     echo "--- Installing BEEPANEL"
     
     # install kivy dependencies
-    apt-get install -y  libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev \
-                        pkg-config libgl1-mesa-dev libgles2-mesa-dev \
-                        python-setuptools libgstreamer1.0-dev git-core \
-                        gstreamer1.0-plugins-{bad,base,good,ugly} \
-                        gstreamer1.0-{omx,alsa} python-dev cython \
-                        python-pip python-netifaces libmtdev1
+    #apt-get install -y  libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev \
+    #                    pkg-config libgl1-mesa-dev libgles2-mesa-dev \
+    #                    python-setuptools libgstreamer1.0-dev git-core \
+    #                    gstreamer1.0-plugins-{bad,base,good,ugly} \
+    #                    gstreamer1.0-{omx,alsa} python-dev cython \
+    #                    python-pip python-netifaces libmtdev1
+    apt-get install -y  python-setuptools python-pip python-netifaces \
+                        libmtdev1 cython python-pygame
     pip install --upgrade pip
     pip install --upgrade virtualenv
     pip install python-wifi
 
     # patch kivy, to fix inverted coordinates in screen, and install it
-    pushd /home/pi/kivy
-        cp /home/pi/hidinput.patch /home/pi/kivy
-        patch -Np1 -i hidinput.patch
+    # pushd /home/pi/kivy
+    #    cp /home/pi/hidinput.patch /home/pi/kivy
+    #    patch -Np1 -i hidinput.patch
         #make
         #echo "export PYTHONPATH=$(pwd):\$PYTHONPATH" >> /home/pi/.profile
-    popd
+    #popd
     pip install /home/pi/kivy
 
     #Add fbcp for TFT screens
