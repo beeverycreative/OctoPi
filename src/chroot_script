@@ -119,13 +119,13 @@ pushd /home/pi
     pip install --upgrade virtualenv
     pip install python-wifi
 
-    # patch kivy, to fix inverted coordinates in screen, and install it
-    # pushd /home/pi/kivy
-    #    cp /home/pi/hidinput.patch /home/pi/kivy
-    #    patch -Np1 -i hidinput.patch
-        #make
-        #echo "export PYTHONPATH=$(pwd):\$PYTHONPATH" >> /home/pi/.profile
-    #popd
+    #patch kivy, to fix inverted coordinates in screen, and install it
+    mv /home/pi/hidinput.patch /home/pi/kivy
+    pushd /home/pi/kivy
+       patch -Np1 -i hidinput.patch
+       make
+       echo "export PYTHONPATH=$(pwd):\$PYTHONPATH" >> /home/pi/.profile
+    popd
     pip install /home/pi/kivy
 
     #Add fbcp for TFT screens
