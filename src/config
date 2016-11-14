@@ -84,6 +84,7 @@ fi
 # other repos
 
 [ -n "$BEEWEBPI_KIVY_REPO_SHIP" ] || BEEWEBPI_KIVY_REPO_SHIP=https://github.com/kivy/kivy
+[ -n "$BEEWEBPI_KIVY_REPO_BRANCH" ] || BEEWEBPI_KIVY_REPO_BRANCH=1.9.1
 [ -n "$BEEWEBPI_LIBUSB_REPO_SHIP" ] || BEEWEBPI_LIBUSB_REPO_SHIP=https://github.com/libusb/libusb
 
 # CuraEngine archive & version
