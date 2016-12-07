@@ -86,7 +86,7 @@ pushd /home/pi
   chown -R pi:pi /home/pi/oprint
   sudo -u pi /home/pi/oprint/bin/pip install ndg-httpsclient pyasn1
 
-  # BEEweb & pyserial
+  # BEEweb
   if [ "$BEEWEBPI_INCLUDE_BEEWEB" == "yes" ]
   then
     echo "--- Installing BEEweb"
@@ -141,8 +141,7 @@ pushd /home/pi
     popd
   fi
 
-
-  # BEEWEBPI
+  # BEEWEBPI (for BEEweb settings update)
   if [ "$BEEWEBPI_INCLUDE_BEEWEBPI" == "yes" ]
   then
     echo "--- Installing BEEWEBPI (self)"
