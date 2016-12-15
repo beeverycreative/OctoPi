@@ -62,7 +62,7 @@ pushd /home/pi
   sudo -u pi virtualenv oprint
 
   # first lets upgrade pip (the shipped version is way too old...)
-  sudo -u pi /home/pi/oprint/bin/pip install --upgrade pip
+  sudo -u pi /home/pi/oprint/bin/pip install --upgrade "pip>=8,<9"
 
   # we also want pyopenssl so we have a secure SSL context available
   # since that stuff takes ages to compile during build, we do a somewhat dirty
@@ -86,13 +86,13 @@ pushd /home/pi
   chown -R pi:pi /home/pi/oprint
   sudo -u pi /home/pi/oprint/bin/pip install ndg-httpsclient pyasn1
 
-  # BEEweb & pyserial
+  # BEEweb
   if [ "$BEEWEBPI_INCLUDE_BEEWEB" == "yes" ]
   then
     echo "--- Installing BEEweb"
 
     #pybonjour (for mdns discovery)
-    sudo -u pi /home/pi/oprint/bin/pip install https://pybonjour.googlecode.com/files/pybonjour-1.1.1.tar.gz
+    sudo -u pi /home/pi/oprint/bin/pip install https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/pybonjour/pybonjour-1.1.1.tar.gz
 
     #BEEweb
     chown -R pi:pi BEEweb
@@ -107,22 +107,24 @@ pushd /home/pi
     echo "--- Installing BEEPANEL"
     
     # install kivy dependencies
-    apt-get install -y  libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev \
-                        pkg-config libgl1-mesa-dev libgles2-mesa-dev \
-                        python-setuptools libgstreamer1.0-dev git-core \
-                        gstreamer1.0-plugins-{bad,base,good,ugly} \
-                        gstreamer1.0-{omx,alsa} python-dev cython \
-                        python-pip python-netifaces libmtdev1
+    #apt-get install -y  libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev \
+    #                    pkg-config libgl1-mesa-dev libgles2-mesa-dev \
+    #                    python-setuptools libgstreamer1.0-dev git-core \
+    #                    gstreamer1.0-plugins-{bad,base,good,ugly} \
+    #                    gstreamer1.0-{omx,alsa} python-dev cython \
+    #                    python-pip python-netifaces libmtdev1
+    apt-get install -y  python-setuptools python-pip python-netifaces \
+                        libmtdev1 cython python-pygame
     pip install --upgrade pip
     pip install --upgrade virtualenv
     pip install python-wifi
 
-    # patch kivy, to fix inverted coordinates in screen, and install it
+    #patch kivy, to fix inverted coordinates in screen, and install it
+    mv /home/pi/hidinput.patch /home/pi/kivy
     pushd /home/pi/kivy
-        cp /home/pi/hidinput.patch /home/pi/kivy
-        patch -Np1 -i hidinput.patch
-        #make
-        #echo "export PYTHONPATH=$(pwd):\$PYTHONPATH" >> /home/pi/.profile
+       patch -Np1 -i hidinput.patch
+       make
+       echo "export PYTHONPATH=$(pwd):\$PYTHONPATH" >> /home/pi/.profile
     popd
     pip install /home/pi/kivy
 
@@ -139,8 +141,7 @@ pushd /home/pi
     popd
   fi
 
-
-  # BEEWEBPI
+  # BEEWEBPI (for BEEweb settings update)
   if [ "$BEEWEBPI_INCLUDE_BEEWEBPI" == "yes" ]
   then
     echo "--- Installing BEEWEBPI (self)"
@@ -165,13 +166,11 @@ pushd /home/pi
     echo "--- Installing CuraEngine"
     folder=CuraEngine-$BEEWEBPI_CURAENGINE_VERSION
     zipfile=$folder.zip
-    apt-get -y install gcc-4.7 g++-4.7
+    apt-get -y install gcc-4.9 g++-4.9
     sudo -u pi wget -O$zipfile $BEEWEBPI_CURAENGINE_ARCHIVE
     sudo -u pi unzip $zipfile
     pushd $folder
-      sudo -u pi wget https://gist.githubusercontent.com/foosel/f86d6a729c0187ff8a82/raw/3d4f152b924080f502d887d11269f27a2389d64d/CuraEngine.patch
-      sudo -u pi patch < CuraEngine.patch
-      sudo -u pi make CXX=g++-4.7 VERSION=$BEEWEBPI_CURAENGINE_VERSION
+      sudo -u pi make CXX=g++-4.9 VERSION=$BEEWEBPI_CURAENGINE_VERSION
       cp build/CuraEngine /usr/local/bin/cura_engine
     popd
     sudo -u pi rm -r $folder $zipfile

@@ -3,3 +3,4 @@ src/image/*.zip
 **/key.json
 workspace*/
 src/build.log
+.idea

@@ -69,7 +69,7 @@ Content-Type: text/html
     </head>
     <body>
         <div class="wrapper">
-            <h1>BEEsoft server is currently not running</h1>
+            <h1>The BEEsoft server is currently not running</h1>
 
             <p>
                 If you just started up your Raspberry Pi, please wait a couple of seconds, then
