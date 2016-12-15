@@ -166,13 +166,11 @@ pushd /home/pi
     echo "--- Installing CuraEngine"
     folder=CuraEngine-$BEEWEBPI_CURAENGINE_VERSION
     zipfile=$folder.zip
-    apt-get -y install gcc-4.7 g++-4.7
+    apt-get -y install gcc-4.9 g++-4.9
     sudo -u pi wget -O$zipfile $BEEWEBPI_CURAENGINE_ARCHIVE
     sudo -u pi unzip $zipfile
     pushd $folder
-      sudo -u pi wget https://gist.githubusercontent.com/foosel/f86d6a729c0187ff8a82/raw/3d4f152b924080f502d887d11269f27a2389d64d/CuraEngine.patch
-      sudo -u pi patch < CuraEngine.patch
-      sudo -u pi make CXX=g++-4.7 VERSION=$BEEWEBPI_CURAENGINE_VERSION
+      sudo -u pi make CXX=g++-4.9 VERSION=$BEEWEBPI_CURAENGINE_VERSION
       cp build/CuraEngine /usr/local/bin/cura_engine
     popd
     sudo -u pi rm -r $folder $zipfile
