@@ -1,4 +1,4 @@
-_description: Imported from A120 - Pearl Gold_BEEME_low_NZ400.ini on 2016-04-06 10:46
+_description: Imported from A120 - Pearl Gold_BEEME_low_NZ400.ini on 2016-12-28 16:25
 _display_name: A120 - Pearl Gold_BEEME_low_NZ400
 bottom_layer_speed: 20
 bottom_thickness: 0.3
