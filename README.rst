@@ -48,7 +48,7 @@ BEEwebPi can be built from Debian, Ubuntu, Raspbian, or even BEEwebPi.
 Build requires about 2.5 GB of free space available.
 You can build it by issuing the following commands::
 
-    sudo apt-get install realpath qemu-user-static automake gcc-arm-linux-gnueabihf libudev-dev
+    sudo apt-get install realpath qemu-user-static automake gcc-arm-linux-gnueabihf libudev-dev git
     
     git clone https://github.com/beeverycreative/beewebpi.git
     cd beewebpi/src/image

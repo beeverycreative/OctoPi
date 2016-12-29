@@ -1,4 +1,4 @@
-_description: Imported from A023 - Black_BEEME_highplus_NZ400.ini on 2016-04-06 10:45
+_description: Imported from A023 - Black_BEEME_highplus_NZ400.ini on 2016-12-28 16:24
 _display_name: A023 - Black_BEEME_highplus_NZ400
 bottom_layer_speed: 20
 bottom_thickness: 0.3

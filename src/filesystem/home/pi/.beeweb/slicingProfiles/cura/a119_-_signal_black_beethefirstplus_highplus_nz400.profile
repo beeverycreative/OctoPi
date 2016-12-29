@@ -1,5 +1,5 @@
 _description: Imported from A119 - Signal Black_BEETHEFIRSTPLUS_highplus_NZ400.ini
-  on 2016-04-06 10:46
+  on 2016-12-28 16:25
 _display_name: A119 - Signal Black_BEETHEFIRSTPLUS_highplus_NZ400
 bottom_layer_speed: 20
 bottom_thickness: 0.3
