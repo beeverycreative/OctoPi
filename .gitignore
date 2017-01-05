@@ -4,3 +4,5 @@ src/image/*.zip
 workspace*/
 src/build.log
 .idea
+
+.DS_Store

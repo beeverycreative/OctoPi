@@ -1,5 +1,5 @@
-_description: Imported from PETg (beta)_BEETHEFIRSTPLUS_high_NZ600.ini on 2016-04-06
-  10:46
+_description: Imported from PETg (beta)_BEETHEFIRSTPLUS_high_NZ600.ini on 2016-12-28
+  16:25
 _display_name: PETg (beta)_BEETHEFIRSTPLUS_high_NZ600
 bottom_layer_speed: 20
 bottom_thickness: 0.3
