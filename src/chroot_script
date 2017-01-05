@@ -118,6 +118,7 @@ pushd /home/pi
     pip install --upgrade pip
     pip install --upgrade virtualenv
     pip install python-wifi
+    pip install pyyaml
 
     #patch kivy, to fix inverted coordinates in screen, and install it
     mv /home/pi/hidinput.patch /home/pi/kivy
