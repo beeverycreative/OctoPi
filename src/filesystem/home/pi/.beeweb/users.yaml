@@ -1,0 +1,7 @@
+beepanel:
+  active: true
+  apikey: 87A77B315CED40CC9A035850678517D5
+  password: e43a68bf8435f707fb67d116a65031f40a7aa218009bcad9fb81ec3e9e3af88e1b4e0849c889e2c10d5c81eb212d6f391239a8345e147c3434d2bd7d09e6d7ca
+  roles:
+  - user
+  settings: {}
