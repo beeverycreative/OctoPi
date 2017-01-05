@@ -16,5 +16,5 @@
 # Author: BVC
 
 sudo -u pi /usr/local/bin/fbcp & 
-sudo -u pi /usr/bin/python /home/pi/beepanel2/main.py &
+sudo -u pi bash /home/pi/beepanel2/beePanel.sh &
 
