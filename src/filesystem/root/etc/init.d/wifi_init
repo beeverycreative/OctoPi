@@ -8,7 +8,7 @@
 # Should-Stop:
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
-# Short-Description: BEEweb daemon
+# Short-Description: Wifi mode init
 # Description:       Starts wifi AP mode script
 #
 ### END INIT INFO

@@ -1,0 +1,31 @@
+#!/bin/sh
+
+### BEGIN INIT INFO
+# Provides:          eth0_init
+# Required-Start:    $all
+# Required-Stop:
+# Should-Start:
+# Should-Stop:
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Activates eth0 interface
+# Description:       Activates the eth0 network interface
+#
+### END INIT INFO
+
+# Author: BVC
+
+sudo service networking restart
+
+sudo ifconfig eth0 down
+sudo ifconfig eth0 up
+
+ipAssigned=$(/sbin/ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}')
+
+if [ "$ipAssigned" == "" ]
+then
+    sudo dhcpcd -w eth0 -t 0 &
+else
+    echo "Ip already assigned"
+fi
+
