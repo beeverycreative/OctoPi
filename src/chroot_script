@@ -120,6 +120,7 @@ pushd /home/pi
     pip install python-wifi
     pip install pyyaml
     pip install logentries
+    pip install wifi
 
     #patch kivy, to fix inverted coordinates in screen, and install it
     mv /home/pi/hidinput.patch /home/pi/kivy
