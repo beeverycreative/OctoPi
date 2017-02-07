@@ -11,6 +11,8 @@ plugins:
     checks:
       octoprint:
         update_folder: /home/pi/BEEweb
+      BEEpanel:
+        update_folder: /home/pi/beepanel2
       BEEsoft configurations:
         checkout_folder: /home/pi/beewebpi-repo
     octoprint_restart_command: sudo service beeweb restart
