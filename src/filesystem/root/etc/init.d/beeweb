@@ -18,7 +18,7 @@
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 DESC="BEEweb Daemon"
 NAME="BEEweb"
-DAEMON=/usr/local/bin/beeweb
+DAEMON=/home/pi/oprint/bin/beeweb
 PIDFILE=/var/run/$NAME.pid
 PKGNAME=beeweb
 SCRIPTNAME=/etc/init.d/$PKGNAME
