@@ -118,6 +118,9 @@ pushd /home/pi
     pip install --upgrade pip
     pip install --upgrade virtualenv
     pip install python-wifi
+    pip install pyyaml
+    pip install logentries
+    pip install wifi
 
     #patch kivy, to fix inverted coordinates in screen, and install it
     mv /home/pi/hidinput.patch /home/pi/kivy
@@ -353,6 +356,7 @@ chmod +x /home/pi/remove_wpa_supplicant_conf.sh
 # creates the necessary init symlinks
 update-rc.d wifi_init defaults
 update-rc.d kivy_init defaults
+update-rc.d eth0_init defaults
 
 #cleanup
 apt-get clean
