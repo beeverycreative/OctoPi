@@ -352,8 +352,8 @@ chmod +x /home/pi/wifi_ap_mode.sh
 chmod +x /home/pi/wifi_client_mode.sh
 chmod +x /home/pi/hostname_upd.sh
 chmod +x /home/pi/remove_wpa_supplicant_conf.sh
-chmod +x /home/pi/webcam
-chmod +x /home/pi/webcamDaemon
+chmod +x /home/pi/webcam.sh
+chmod +x /home/pi/webcamDaemon.sh
 
 # creates the necessary init symlinks
 update-rc.d wifi_init defaults
