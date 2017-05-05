@@ -3,6 +3,7 @@ src/image/*.zip
 **/key.json
 workspace*/
 src/build.log
+build.log
 .idea
 
 .DS_Store
