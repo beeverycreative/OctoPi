@@ -5,4 +5,5 @@ update_config=1
 network={
     ssid="home"
     psk="YourPassphrase"
+    scan_ssid=0
 }
