@@ -31,4 +31,4 @@ volume:
 startGcode:
   - "M109 S{print_temperature}\nM300\nM107\nG28\nG92 E\nG1 X-98.0 Y-20.0 Z5.0 F3000\nG1 Y-70.0 Z0.3\nG1 X-98.0 Y66.0 F500 E40\nG92 E"
 endGcode:
-  - "M300\nG28 X\nG28 Z\nG1 Y65\nG92 E"
+  - ";end gcode\nM300\nG28 X\nG28 Z\nG1 Y65\nG92 E"
