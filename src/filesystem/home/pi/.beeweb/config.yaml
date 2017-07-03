@@ -5,6 +5,8 @@ webcam:
 plugins:
   cura:
     cura_engine: /usr/local/bin/cura_engine
+  cura2:
+    cura_engine: /usr/local/bin/cura_engine2
   discovery:
     publicPort: 80
   softwareupdate:
@@ -38,6 +40,7 @@ system:
     async: true
     ignore: true
 slicing:
+  cura2: false
   defaultProfiles:
     cura: a023_-_black_med_beethefirst
 server:
