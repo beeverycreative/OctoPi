@@ -18,13 +18,11 @@ extruder:
   offsets:
   - - 0.0
     - 0.0
-  sharedNozzle: false
 heatedBed: false
-id: beethefirstplus
-model: BEETHEFIRST+
-name: BEETHEFIRST PLUS
+id: beethefirst-bootloader
+model: BEETHEFIRST
+name: BEETHEFIRST
 volume:
-  custom_box: false
   depth: 135.0
   formFactor: rectangular
   height: 125.0
