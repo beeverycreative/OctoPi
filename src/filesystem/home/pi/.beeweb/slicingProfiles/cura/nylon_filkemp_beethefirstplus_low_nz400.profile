@@ -1,5 +1,5 @@
-_description: Imported from Nylon Filkemp_BEETHEFIRSTPLUS_low_NZ400.ini on 2017-05-26
-  16:01
+_description: Imported from Nylon Filkemp_BEETHEFIRSTPLUS_low_NZ400.ini on 2017-07-11
+  09:46
 _display_name: Nylon Filkemp_BEETHEFIRSTPLUS_low_NZ400
 bottom_layer_speed: 20
 bottom_thickness: 0.3
@@ -108,7 +108,7 @@ end_gcode:
 
   '
 fan_enabled: false
-fan_full_height: true
+fan_full_height: 1.0
 fan_speed: 25
 fan_speed_max: 25
 filament_diameter:
@@ -140,7 +140,7 @@ print_temperature:
 - 0
 - 0
 raft_airgap: 0.22
-raft_base_linewidth: true
+raft_base_linewidth: 1.0
 raft_base_thickness: 0.3
 raft_interface_linewidth: 0.4
 raft_interface_thickness: 0.27

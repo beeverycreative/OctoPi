@@ -1,5 +1,5 @@
-_description: Imported from A031 - Neon Green_BEETHEFIRSTPLUS_low_NZ400.ini on 2017-05-26
-  16:00
+_description: Imported from A031 - Neon Green_BEETHEFIRSTPLUS_low_NZ400.ini on 2017-07-11
+  09:45
 _display_name: A031 - Neon Green_BEETHEFIRSTPLUS_low_NZ400
 bottom_layer_speed: 20
 bottom_thickness: 0.3
@@ -139,7 +139,7 @@ print_temperature:
 - 0
 - 0
 raft_airgap: 0.22
-raft_base_linewidth: true
+raft_base_linewidth: 1.0
 raft_base_thickness: 0.3
 raft_interface_linewidth: 0.4
 raft_interface_thickness: 0.27
@@ -158,7 +158,7 @@ skirt_gap: 3.0
 skirt_line_count: false
 skirt_minimal_length: 150.0
 solid_bottom: true
-solid_layer_thickness: true
+solid_layer_thickness: 1.0
 solid_top: true
 spiralize: false
 start_gcode:

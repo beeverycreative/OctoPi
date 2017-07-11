@@ -1,5 +1,5 @@
 _description: Imported from A113 - Ultramarine Blue_BEETHEFIRSTPLUS_high_NZ400.ini
-  on 2017-05-26 16:01
+  on 2017-07-11 09:46
 _display_name: A113 - Ultramarine Blue_BEETHEFIRSTPLUS_high_NZ400
 bottom_layer_speed: 20
 bottom_thickness: 0.3
@@ -139,7 +139,7 @@ print_temperature:
 - 0
 - 0
 raft_airgap: 0.22
-raft_base_linewidth: true
+raft_base_linewidth: 1.0
 raft_base_thickness: 0.3
 raft_interface_linewidth: 0.4
 raft_interface_thickness: 0.27
