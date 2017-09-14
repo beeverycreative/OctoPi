@@ -1,4 +1,4 @@
-_description: Imported from PETG_BEETHEFIRSTPLUS_medium_NZ600.ini on 2017-05-26 16:00
+_description: Imported from PETG_BEETHEFIRSTPLUS_medium_NZ600.ini on 2017-07-11 09:46
 _display_name: PETG_BEETHEFIRSTPLUS_medium_NZ600
 bottom_layer_speed: 10
 bottom_thickness: 0.1
@@ -139,7 +139,7 @@ print_temperature:
 - 0
 - 0
 raft_airgap: 0.22
-raft_base_linewidth: true
+raft_base_linewidth: 1.0
 raft_base_thickness: 0.3
 raft_interface_linewidth: 0.4
 raft_interface_thickness: 0.27
