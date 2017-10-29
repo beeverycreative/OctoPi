@@ -1,8 +1,8 @@
 {
-    "id": "A023-black",
-    "name": "A023 - Black",
+    "id": "A115-puregreen",
+    "name": "A115 - Pure Green",
     "version": 2,
-    "inherits": "pla_a0xx",
+    "inherits": "pla_a1xx",
     "cost": 20,
     "color": "#ffffff" ,
     "nozzles_supported": [0.4, 0.6],
@@ -22,7 +22,7 @@
                     "material_print_temperature": { "default_value": 205 },
                     "material_print_temperature_layer_0": { "default_value": 205 },
                     "default_material_print_temperature": { "default_value": 205 },
-                    "material_flow": { "default_value": 97 }
+                    "material_flow": { "default_value": 99.7 }
                 },
 
                 "medium":
@@ -34,7 +34,7 @@
                     "material_print_temperature": { "default_value": 200 },
                     "material_print_temperature_layer_0": { "default_value": 200 },
                     "default_material_print_temperature": { "default_value": 200 },
-                    "material_flow": { "default_value": 96 }
+                    "material_flow": { "default_value": 98.6 }
                 },
 
                 "high":
@@ -46,7 +46,7 @@
                     "material_print_temperature": { "default_value": 200 },
                     "material_print_temperature_layer_0": { "default_value": 200 },
                     "default_material_print_temperature": { "default_value": 200 },
-                    "material_flow": { "default_value": 96 }
+                    "material_flow": { "default_value": 98.6 }
                 },
 
                 "high+":
@@ -58,7 +58,7 @@
                     "material_print_temperature": { "default_value": 200 },
                     "material_print_temperature_layer_0": { "default_value": 200 },
                     "default_material_print_temperature": { "default_value": 200 },
-                    "material_flow": { "default_value": 96 }
+                    "material_flow": { "default_value": 98.6 }
                 }
             }
         }

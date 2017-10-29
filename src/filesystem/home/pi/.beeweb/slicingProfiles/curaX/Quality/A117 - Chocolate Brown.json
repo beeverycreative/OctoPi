@@ -1,8 +1,8 @@
 {
-    "id": "A023-black",
-    "name": "A023 - Black",
+    "id": "A117-chocolatebrown",
+    "name": "A117 - Chocolate Brown",
     "version": 2,
-    "inherits": "pla_a0xx",
+    "inherits": "pla_a1xx",
     "cost": 20,
     "color": "#ffffff" ,
     "nozzles_supported": [0.4, 0.6],

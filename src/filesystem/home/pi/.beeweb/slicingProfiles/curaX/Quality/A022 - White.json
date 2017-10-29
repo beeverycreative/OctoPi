@@ -1,6 +1,6 @@
 {
-    "id": "A023-black",
-    "name": "A023 - Black",
+    "id": "A022-white",
+    "name": "A022 - White",
     "version": 2,
     "inherits": "pla_a0xx",
     "cost": 20,
