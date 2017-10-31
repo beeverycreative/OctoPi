@@ -20,9 +20,9 @@ extruder:
     - 0.0
   sharedNozzle: false
 heatedBed: false
-id: beeme
-model: BEE ME
-name: BEE ME
+id: beethefirst
+model: BEETHEFIRST
+name: BEETHEFIRST
 volume:
   custom_box: false
   depth: 135.0
